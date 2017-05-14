@@ -4,7 +4,7 @@ Personal notes on statistics with a focus on applications to experimental high e
 
 Most of the notes are in the form of [Jupyter](http://jupyter.org/) notebooks, which are organized in the `Notebooks` directory.
 
-[![license](https://img.shields.io/github/license/matthewfeickert/Statistics-Notes.svg)]() [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/matthewfeickert/Statistics-Notes)
+[![license](https://img.shields.io/github/license/matthewfeickert/Statistics-Notes.svg)]() [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/matthewfeickert/statistics-notes)
 
 ## References
 
