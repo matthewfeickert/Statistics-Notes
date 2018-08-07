@@ -4,7 +4,11 @@ Personal notes on statistics with a focus on applications to experimental high e
 
 Most of the notes are in the form of [Jupyter](http://jupyter.org/) notebooks, which are organized in the `Notebooks` directory.
 
-[![license](https://img.shields.io/github/license/matthewfeickert/Statistics-Notes.svg)]() [![DOI](https://zenodo.org/badge/91207877.svg)](https://zenodo.org/badge/latestdoi/91207877) [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/master) [![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](http://nbviewer.jupyter.org/github/matthewfeickert/Statistics-Notes/tree/master/Notebooks/)
+[![license](https://img.shields.io/github/license/matthewfeickert/Statistics-Notes.svg)]()
+[![DOI](https://zenodo.org/badge/91207877.svg)](https://zenodo.org/badge/latestdoi/91207877)
+[![Build Status](https://travis-ci.com/matthewfeickert/Statistics-Notes.svg?branch=master)](https://travis-ci.com/matthewfeickert/Statistics-Notes)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/master)
+[![nbviewer](https://img.shields.io/badge/view%20on-nbviewer-brightgreen.svg)](http://nbviewer.jupyter.org/github/matthewfeickert/Statistics-Notes/tree/master/Notebooks/)
 
 ## References
 
