@@ -3,7 +3,8 @@ cache: pip
 python: '3.6'
 install:
 - pip install --upgrade pip
-- pip install -U -q -r binder/requirements.txt
+- pip install --upgrade -q -r binder/requirements.txt
+- pip freeze
 script:
   - pytest
 
