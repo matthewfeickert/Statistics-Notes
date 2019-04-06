@@ -3,5 +3,5 @@ matplotlib
 numpy
 scipy
 sympy
-papermill
+papermill~=0.16
 pytest
