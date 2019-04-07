@@ -27,3 +27,5 @@ def test_notebooks_all_execute(tmpdir):
 
     pm.execute_notebook(
         'Notebooks/Sampling/Rejection-Sampling-MC.ipynb', **common_kwargs)
+
+    pm.execute_notebook('Notebooks/Bayesian/Bayesian-Inference.ipynb', **common_kwargs)
