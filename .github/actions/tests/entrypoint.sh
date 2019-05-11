@@ -2,7 +2,7 @@
 
 function print_and_run () {
     printf "\n# %s\n" "${1}"
-    eval $( echo "$1")
+    eval $(echo "$1")
 }
 
 print_and_run "which python"

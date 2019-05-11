@@ -1,11 +1,17 @@
-workflow "Test Python 3" {
+workflow "Test Python 3.6.8" {
   on = "push"
-  resolves = ["Python 3.6.8 Debian", "Python 3.7.3 Debian"]
+  resolves = ["Python 3.6.8 Debian"]
 }
 
 action "Python 3.6.8 Debian" {
   uses = "docker://python:3.6.8"
   runs = "./.github/actions/tests/entrypoint.sh"
+}
+
+
+workflow "Test Python 3.7.3" {
+  on = "push"
+  resolves = ["Python 3.7.3 Debian"]
 }
 
 action "Python 3.7.3 Debian" {
