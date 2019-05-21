@@ -10,6 +10,9 @@ def test_notebooks_all_execute(tmpdir):
     }
 
     pm.execute_notebook(
+        'Notebooks/Distributions/Bernoulli-Distribution.ipynb', **common_kwargs
+    )
+    pm.execute_notebook(
         'Notebooks/Introductory/Chi-Squared-Distribution.ipynb', **common_kwargs
     )
     pm.execute_notebook('Notebooks/Introductory/Error-on-means.ipynb', **common_kwargs)
