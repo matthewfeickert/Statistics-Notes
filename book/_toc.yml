@@ -1,0 +1,7 @@
+# https://jupyterbook.org/customize/toc.html
+- file: introduction
+
+- part: Introduction
+  chapters:
+  - file: notebooks/Introductory/Likelihood-Function
+    title: The Likelihood Function
