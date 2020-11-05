@@ -5,3 +5,13 @@
   chapters:
   - file: notebooks/Introductory/Likelihood-Function
     title: The Likelihood Function
+  - file: notebooks/Introductory/Chi-Squared-Distribution.ipynb
+    title: Chi-Squared Distribution
+  - file: notebooks/Introductory/Error-on-means.ipynb
+    title: Uncertaninty on Means
+  - file: notebooks/Introductory/Gaussian-Distribution.ipynb
+    title: The Normal Distribution
+  - file: notebooks/Introductory/Gaussian-Sampling.ipynb
+    title: Gaussian Sampling
+  - file: notebooks/Introductory/probability-integral-transform.ipynb
+    title: Probability Integral Transform
