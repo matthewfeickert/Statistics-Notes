@@ -26,3 +26,8 @@
   chapters:
   - file: notebooks/simulation/Rejection-Sampling-MC.ipynb
     title: Monte Carlo Simulation via Rejection Sampling
+
+- part: Concepts in HEP
+  chapters:
+  - file: notebooks/HEP/Extended-Likelihood.ipynb
+    title: Extended Likelihood
