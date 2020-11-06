@@ -25,6 +25,7 @@ jobs:
 
     - name: Build the book
       run: |
+        python -c "import matplotlib.pyplot as plt; plt" # Generate fonts
         jupyter-book build book/
 
     - name: Deploy Jupyter book to GitHub pages
