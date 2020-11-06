@@ -21,3 +21,8 @@
   chapters:
   - file: notebooks/Introductory/probability-integral-transform.ipynb
     title: Probability Integral Transform
+
+- part: Simulation
+  chapters:
+  - file: notebooks/simulation/Rejection-Sampling-MC.ipynb
+    title: Monte Carlo Simulation via Rejection Sampling
