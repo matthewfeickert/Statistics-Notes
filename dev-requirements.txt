@@ -1,0 +1,8 @@
+# lint
+pre-commit
+pyupgrade
+nbqa
+black
+# test
+papermill~=1.0
+pytest
