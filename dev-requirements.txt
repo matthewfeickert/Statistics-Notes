@@ -4,5 +4,5 @@ pyupgrade
 nbqa
 black
 # test
-papermill~=1.0
+papermill~=2.0
 pytest
