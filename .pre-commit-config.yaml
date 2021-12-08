@@ -32,8 +32,9 @@ repos:
     - id: nbqa-pyupgrade
       additional_dependencies: [pyupgrade==2.29.1]
 
-# -   repo: https://github.com/codespell-project/codespell
-#     rev: v2.1.0
-#     hooks:
-#     - id: codespell
-#       files: ^.*\.(py|ipynb|md|rst)$
+-   repo: https://github.com/codespell-project/codespell
+    rev: v2.1.0
+    hooks:
+    - id: codespell
+      files: ^.*\.(py|ipynb|md|rst)$
+      args: ["-w", "-L", "hist"]
