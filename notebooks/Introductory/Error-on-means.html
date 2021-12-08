@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unweighted and Weighted Means &#8212; Statistics Notes</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gaussian Sampling and use of Maximal Likliehood Estimators" href="Gaussian-Sampling.html" />
+    <link rel="prev" title="The Likelihood Function" href="Likelihood-Function.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistics Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../introduction.html">
+   Statistics Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Likelihood-Function.html">
+   The Likelihood Function
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Uncertaninty on Means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Gaussian-Sampling.html">
+   Gaussian Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Gaussian-Distribution.html">
+   The Normal Distribution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chi-Squared-Distribution.html">
+   Chi-Squared Distribution
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Results of Probability Theory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability-integral-transform.html">
+   Probability integral transform
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Simulation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../simulation/Rejection-Sampling-MC.html">
+   Monte Carlo Simulation via Rejection Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concepts in HEP
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../HEP/Extended-Likelihood.html">
+   Extended Likelihood
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Introductory/Error-on-means.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Introductory/Error-on-means.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/matthewfeickert/Statistics-Notes/edit/main/book/notebooks/Introductory/Error-on-means.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/main?urlpath=lab/tree/book/notebooks/Introductory/Error-on-means.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/matthewfeickert/Statistics-Notes/blob/main/book/notebooks/Introductory/Error-on-means.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimator-motivated-derivations">
+   Maximum Likelihood Estimator motivated “derivations”
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unweighted-means">
+     Unweighted Means
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weighted-means">
+     Weighted Means
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#specific-examples">
+   Specific Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="unweighted-and-weighted-means">
+<h1>Unweighted and Weighted Means<a class="headerlink" href="#unweighted-and-weighted-means" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpathces</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="maximum-likelihood-estimator-motivated-derivations">
+<h2>Maximum Likelihood Estimator motivated “derivations”<a class="headerlink" href="#maximum-likelihood-estimator-motivated-derivations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unweighted-means">
+<h3>Unweighted Means<a class="headerlink" href="#unweighted-means" title="Permalink to this headline">¶</a></h3>
+<p>If we make <span class="math notranslate nohighlight">\(n\)</span> identical statistically independent (isi) measurements of a random variable <span class="math notranslate nohighlight">\(x\)</span>, such that the measurements collected form data <span class="math notranslate nohighlight">\(\vec{x} = \left\{x_i, \cdots, x_n\right\}\)</span>, from a Gaussian (Normal) distribution,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+L\left(\vec{x}; \vec{\theta}\right) = \prod_{i=1}^{n} f(x_i; \mu, \sigma) = \frac{1}{(2\pi)^{n/2} \sigma^{n}} \exp\left(-\frac{1}{2\sigma^2} \sum_{i=1}^{n} \left(x_i - \mu\right)^2 \right)
+\end{equation}
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+-\ln L = \frac{n}{2} \ln\left(2\pi\right) + n \ln \sigma + \frac{1}{2\sigma^2} \sum_{i=1}^{n}\left(x_i - \mu\right)^2
+\end{equation}
+\]</div>
+<p>and so <span class="math notranslate nohighlight">\(L\)</span> is maximized with respect to a variable <span class="math notranslate nohighlight">\(\alpha\)</span> when <span class="math notranslate nohighlight">\(-\ln L\)</span> is minimized,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\frac{\partial \left(-\ln L\right)}{\partial \alpha} = 0.
+\end{equation*}
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(L\)</span> is maximized when</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\frac{\partial \left(-\ln L\right)}{\partial \mu} = -\frac{1}{\sigma^2} \sum_{i=1}^{n}\left(x_i - \mu\right) = 0,
+\end{equation*}
+\]</div>
+<p>which occurs for</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sum_{i=1}^{n} x_i = n \mu,
+\end{equation*}
+\]</div>
+<p>such that the best estimate for true parameter <span class="math notranslate nohighlight">\(\mu\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\boxed{\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}\,}\,,
+\end{equation}
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(L\)</span> is maximized when</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\frac{\partial \left(-\ln L\right)}{\partial \sigma} = \frac{n}{\sigma} - \frac{1}{\sigma^3} \sum_{i=1}^{n} \left(x_i - \mu\right) = 0,
+\end{equation*}
+\]</div>
+<p>which occurs for</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+n\sigma^2 = \sum_{i=1}^{n} \left(x_i - \mu\right)^2,
+\end{equation*}
+\]</div>
+<p>which is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sigma = \sqrt{\frac{1}{n}\sum_{i=1}^{n} \left(x_i - \mu\right)^2}.
+\end{equation*}
+\]</div>
+<p>However, <span class="math notranslate nohighlight">\(\mu\)</span> is an unknown true parameter, and the best estimate of it is <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>, which is in no
+manner required to be equal to <span class="math notranslate nohighlight">\(\mu\)</span>. Thus, the best estimate of <span class="math notranslate nohighlight">\(\sigma\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\boxed{\hat{\sigma}_{\hat{\mu}} = \sqrt{\frac{1}{n}\sum_{i=1}^{n} \left(x_i - \hat{\mu}\right)^2} = \sqrt{\frac{1}{n}\sum_{i=1}^{n} \left(x_i - \bar{x}\,\right)^2}\,}\,.
+\end{equation}
+\]</div>
+<p>If the separation from the mean of each observation, <span class="math notranslate nohighlight">\(\left(x_i - \bar{x}\right) = \delta x = \text{constant}\)</span>, are the same then the uncertainty on the mean is found to be</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sigma_{\hat{\mu}} = \frac{\delta x}{\sqrt{n}},
+\end{equation*}
+\]</div>
+<p>which is often referred to as the “standard error”.</p>
+<hr class="docutils" />
+<p>So, for a population of measurements sampled from a distribution, it can be said that the sample mean is</p>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x},\]</div>
+<p>and the standard deviation of the sample is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sigma = \sqrt{\frac{1}{n}\sum_{i=1}^{n} \left(x_i - \bar{x}\,\right)^2}.
+\end{equation*}
+\]</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="weighted-means">
+<h3>Weighted Means<a class="headerlink" href="#weighted-means" title="Permalink to this headline">¶</a></h3>
+<p>Assume that <span class="math notranslate nohighlight">\(n\)</span> individual measurements <span class="math notranslate nohighlight">\(x_i\)</span> are spread around (unknown) true value <span class="math notranslate nohighlight">\(\theta\)</span> according to a Gaussian distribution, each with known width <span class="math notranslate nohighlight">\(\sigma_i\)</span>.</p>
+<p>This then leads to the likelihood function</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+L(\theta) = \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi}\sigma_i} \exp\left(-\frac{\left(x_i - \theta\right)^2}{2\sigma_i^2} \right)
+\end{equation*}
+\]</div>
+<p>and so negative log-likelihood</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+-\ln L = \frac{1}{2} \ln\left(2\pi\right) + \ln \sigma_i + \frac{1}{2\sigma_i^2} \sum_{i=1}^{n}\left(x_i - \theta\right)^2.
+\end{equation}
+\]</div>
+<p>As before, <span class="math notranslate nohighlight">\(L\)</span> is maximized with respect to a variable <span class="math notranslate nohighlight">\(\alpha\)</span> when <span class="math notranslate nohighlight">\(-\ln L\)</span> is minimized,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\frac{\partial \left(-\ln L\right)}{\partial \alpha} = 0,
+\end{equation*}
+\]</div>
+<p>and so <span class="math notranslate nohighlight">\(L\)</span> is maximized with respect to <span class="math notranslate nohighlight">\(\theta\)</span> when</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\frac{\partial \left(-\ln L\right)}{\partial \theta} = -\sum_{i=1}^{n} \frac{x_i - \theta}{\sigma_i^2} = 0,
+\end{equation*}
+\]</div>
+<p>which occurs for</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sum_{i=1}^{n} \frac{x_i}{\sigma_i^2} = \theta \sum_{i=1}^{n} \frac{1}{\sigma_i^2},
+\end{equation*}
+\]</div>
+<p>which is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\hat{\theta} = \frac{\displaystyle\sum_{i=1}^{n} \frac{x_i}{\sigma_i^2}}{\displaystyle\sum_{i=1}^{n}\frac{1}{\sigma_i^2}}.
+\end{equation}
+\]</div>
+<p>Note that by defining “weights” to be</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+w_i = \frac{1}{\sigma_1^2},
+\end{equation*}
+\]</div>
+<p>this can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\boxed{\hat{\theta} = \frac{\displaystyle\sum_{i=1}^{n} w_i\, x_i}{\displaystyle\sum_{i=1}^{n}w_i}}\,,
+\end{equation}
+\]</div>
+<p>making the term “weighted mean” very transparent.</p>
+<p>To find the standard deviation on the weighted mean, we first look to the variance, <span class="math notranslate nohighlight">\(\sigma^2\)</span>. [4]</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\sigma^2 &amp;= \text{E}\left[\left(\hat{\theta} - \text{E}\left[\hat{\theta}\right]\right)^2\right] \\
+    &amp;= \text{E}\left[\left(\frac{\displaystyle\sum_{i=1}^{n} w_i\, x_i}{\displaystyle\sum_{i=1}^{n}w_i} - \text{E}\left[\frac{\displaystyle\sum_{i=1}^{n} w_i\, x_i}{\displaystyle\sum_{i=1}^{n}w_i}\right]\,\right)^2\right] \\
+    &amp;= \frac{1}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \text{E} \left[ \displaystyle\left(\sum_{i=1}^{n} w_i\,x_i\right)^2 - 2 \displaystyle\left(\sum_{i=1}^{n} w_i\,x_i\right) \displaystyle\left(\sum_{i=j}^{n} w_j\, \text{E}\left[x_j\right]\right) + \displaystyle\left(\sum_{i=1}^{n} w_i\, \text{E}\left[x_i\right]\right)^2 \right] \\
+    &amp;= \frac{1}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \text{E} \left[ \sum_{i,j}^{n} w_i\, x_i w_j\, x_j - 2 \sum_{i,j}^{n} w_i\, x_i w_j\, \text{E}\left[x_j\right] + \sum_{i,j}^{n} w_i\, \text{E}\left[x_i\right] w_j\, \text{E}\left[x_j\right] \right] \\
+    &amp;= \frac{1}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \sum_{i,j}^{n} w_i w_j \left( \text{E}\left[ x_i x_j \right] - 2 \text{E}\left[ x_i \right]\text{E}\left[ x_j \right] + \text{E}\left[ x_i \right]\text{E}\left[ x_j \right] \right) \\
+    &amp;= \frac{1}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \sum_{i,j}^{n} w_i w_j \left( \text{E}\left[ x_i x_j \right] - \text{E}\left[ x_i \right]\text{E}\left[ x_j \right] \right) \\
+    &amp;= \frac{1}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \sum_{i,j}^{n} w_i w_j \,\text{Cov}\left( x_i, x_j \right) = \left\{
+\begin{array}{ll}
+\frac{\displaystyle1}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \displaystyle\sum_{i}^{n} \left( w_i \sigma_i \right)^2\,, &amp; x_i \text{ and } x_j \text{ statistically independent}, \\
+0\,, &amp;\text{ otherwise},
+\end{array}
+\right. \\
+    &amp;= \frac{\displaystyle\sum_{i}^{n} \left( \sigma_i^{-2} \sigma_i \right)^2}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} = \frac{\displaystyle\sum_{i}^{n} w_i}{\displaystyle\left(\sum_{i=1}^{n} w_i\right)^2} \\
+    &amp;= \frac{\displaystyle 1}{\displaystyle\sum_{i=1}^{n} w_i}
+\end{align*}
+\end{split}\]</div>
+<p>Thus, it is seen that the standard deviation on the weighted mean is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\boxed{\sigma_{\hat{\theta}} = \sqrt{\frac{\displaystyle 1}{\displaystyle\sum_{i=1}^{n} w_i}} = \left(\displaystyle\sum_{i=1}^{n} \frac{1}{\sigma_i^2}\right)^{-1/2}}\,.
+\end{equation}
+\]</div>
+<p>Notice that in the event that the uncertainties are uniform for each observation, <span class="math notranslate nohighlight">\(\sigma_i = \delta x\)</span>, the above yields the same result as the unweighted mean. <span class="math notranslate nohighlight">\(\checkmark\)</span></p>
+<p>After this aside it is worth pointing out that [1] have a very elegant demonstration that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sigma_{\hat{\theta}} = \left(\frac{\partial^2\left(- \ln L\right)}{\partial\, \theta^2}\right)^{-1/2} = \left(\displaystyle\sum_{i=1}^{n} \frac{1}{\sigma_i^2}\right)^{-1/2}.
+\end{equation*}
+\]</div>
+<hr class="docutils" />
+<p>So, the average of <span class="math notranslate nohighlight">\(n\)</span> measurements of quantity <span class="math notranslate nohighlight">\(\theta\)</span>, with individual measurements, <span class="math notranslate nohighlight">\(x_i\)</span>, Gaussianly distributed about (unknown) true value <span class="math notranslate nohighlight">\(\theta\)</span> with known width <span class="math notranslate nohighlight">\(\sigma_i\)</span>, is the weighted mean</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\hat{\theta} = \frac{\displaystyle\sum_{i=1}^{n} w_i\, x_i}{\displaystyle\sum_{i=1}^{n}w_i},
+\end{equation*}
+\]</div>
+<p>with weights <span class="math notranslate nohighlight">\(w_i = \sigma_i^{-2}\)</span>, with standard deviation on the weighted mean</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\sigma_{\hat{\theta}} = \sqrt{\frac{\displaystyle 1}{\displaystyle\sum_{i=1}^{n} w_i}} = \left(\displaystyle\sum_{i=1}^{n} \frac{1}{\sigma_i^2}\right)^{-1/2}.
+\end{equation*}
+\]</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="specific-examples">
+<h2>Specific Examples<a class="headerlink" href="#specific-examples" title="Permalink to this headline">¶</a></h2>
+<p>Given the measurements</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{x} = \left\{10, 9, 11\right\}
+\]</div>
+<p>with uncertanties</p>
+<div class="math notranslate nohighlight">
+\[\vec{\sigma_x} = \left\{1, 2, 3\right\}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="n">x_uncertainty</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numerator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">sigma_x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">x_uncertainty</span><span class="p">))</span>
+<span class="n">denominator</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">sigma_x</span> <span class="ow">in</span> <span class="n">x_uncertainty</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hand calculated weighted mean: </span><span class="si">{</span><span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hand calculated weighted mean: 9.897959183673468
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.average.html">NumPy’s <code class="docutils literal notranslate"><span class="pre">average</span></code> method</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># unweighted mean</span>
+<span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">uncert</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">uncert</span> <span class="ow">in</span> <span class="n">x_uncertainty</span><span class="p">]</span>
+<span class="c1"># weighted mean</span>
+<span class="n">weighted_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">x_weights</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weighted_mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.897959183673468
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no method to do this in NumPy!?</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x_weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hand calculated uncertaintiy on weighted mean: </span><span class="si">{</span><span class="n">sigma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hand calculated uncertaintiy on weighted mean: 0.8571428571428571
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A second way to find the uncertainty on the weighted mean</span>
+<span class="n">summand</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">*</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">x_weights</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">x_weights</span><span class="p">)</span> <span class="o">/</span> <span class="n">summand</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8571428571428571
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the data now and take a look at the results</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_weighted_mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">w_mean</span><span class="p">,</span> <span class="n">w_uncert</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># the data to be plotted</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))]</span>
+
+    <span class="n">x_min</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">))]</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))]</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">y_min</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">))]</span>
+    <span class="n">y_max</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">))]</span>
+
+    <span class="n">err_max</span> <span class="o">=</span> <span class="n">errors</span><span class="p">[</span><span class="n">errors</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">errors</span><span class="p">))]</span>
+
+    <span class="c1"># plot data</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="c1"># plot weighted mean</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span> <span class="p">(</span><span class="n">w_mean</span><span class="p">,</span> <span class="n">w_mean</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="c1"># plot uncertainty on weighted mean</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">w_mean</span> <span class="o">-</span> <span class="n">w_uncert</span><span class="p">,</span> <span class="n">w_mean</span> <span class="o">-</span> <span class="n">w_uncert</span><span class="p">),</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">w_mean</span> <span class="o">+</span> <span class="n">w_uncert</span><span class="p">,</span> <span class="n">w_mean</span> <span class="o">+</span> <span class="n">w_uncert</span><span class="p">),</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Axes</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Individual measurements&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value of measruement&quot;</span><span class="p">)</span>
+    <span class="c1"># view range</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x_min</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">y_min</span> <span class="o">-</span> <span class="n">err_max</span><span class="p">,</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">y_max</span> <span class="o">+</span> <span class="n">err_max</span><span class="p">])</span>
+
+    <span class="c1"># ax = figure().gca()</span>
+    <span class="c1"># ax.xaxis.set_major_locator(MaxNLocator(integer=True))</span>
+
+    <span class="c1"># Legends</span>
+    <span class="n">wmean_patch</span> <span class="o">=</span> <span class="n">mpathces</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;Weighted mean: $\mu=</span><span class="si">{</span><span class="n">w_mean</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">$&quot;</span>
+    <span class="p">)</span>
+    <span class="n">uncert_patch</span> <span class="o">=</span> <span class="n">mpathces</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;Uncertainty on the weighted mean: $\pm</span><span class="si">{</span><span class="n">w_uncert</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">wmean_patch</span><span class="p">,</span> <span class="n">uncert_patch</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_weighted_mean</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">x_uncertainty</span><span class="p">,</span> <span class="n">weighted_mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Error-on-means_77_0.png" src="../../_images/Error-on-means_77_0.png" />
+</div>
+</div>
+<p>Now let’s do this again but with data that are Normally distributed about a mean value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">true_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">true_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">true_mu</span><span class="p">,</span> <span class="n">true_sigma</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">gauss_errs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">uncert</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">uncert</span> <span class="ow">in</span> <span class="n">gauss_errs</span><span class="p">]</span>
+
+<span class="n">draw_weighted_mean</span><span class="p">(</span>
+    <span class="n">samples</span><span class="p">,</span>
+    <span class="n">gauss_errs</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Error-on-means_79_0.png" src="../../_images/Error-on-means_79_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="http://eu.wiley.com/WileyCDA/WileyTitle/productCd-3527410589.html"><em>Data Analysis in High Energy Physics</em></a>, Behnke et al., 2013, <span class="math notranslate nohighlight">\(\S\)</span> 2.3.3.1</p></li>
+<li><p><a class="reference external" href="http://www.pp.rhul.ac.uk/~cowan/sda/"><em>Statistical Data Analysis</em></a>, Glen Cowan, 1998</p></li>
+<li><p>University of Marlyand, Physics 261, <a class="reference external" href="http://www.physics.umd.edu/courses/Phys261/F06/ErrorPropagation.pdf">Notes on Error Propagation</a></p></li>
+<li><p>Physics Stack Exchange, <a class="reference external" href="https://physics.stackexchange.com/questions/15197/how-do-you-find-the-uncertainty-of-a-weighted-average"><em>How do you find the uncertainty of a weighted average?</em></a></p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Introductory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Likelihood-Function.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">The Likelihood Function</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Gaussian-Sampling.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gaussian Sampling and use of Maximal Likliehood Estimators</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthew Feickert<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

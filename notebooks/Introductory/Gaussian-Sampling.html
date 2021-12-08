@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gaussian Sampling and use of Maximal Likliehood Estimators &#8212; Statistics Notes</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The Gaussian (Normal) Distribution" href="Gaussian-Distribution.html" />
+    <link rel="prev" title="Unweighted and Weighted Means" href="Error-on-means.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistics Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../introduction.html">
+   Statistics Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Likelihood-Function.html">
+   The Likelihood Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Error-on-means.html">
+   Uncertaninty on Means
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Gaussian Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Gaussian-Distribution.html">
+   The Normal Distribution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chi-Squared-Distribution.html">
+   Chi-Squared Distribution
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Results of Probability Theory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability-integral-transform.html">
+   Probability integral transform
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Simulation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../simulation/Rejection-Sampling-MC.html">
+   Monte Carlo Simulation via Rejection Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concepts in HEP
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../HEP/Extended-Likelihood.html">
+   Extended Likelihood
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Introductory/Gaussian-Sampling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Introductory/Gaussian-Sampling.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/matthewfeickert/Statistics-Notes/edit/main/book/notebooks/Introductory/Gaussian-Sampling.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/main?urlpath=lab/tree/book/notebooks/Introductory/Gaussian-Sampling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/matthewfeickert/Statistics-Notes/blob/main/book/notebooks/Introductory/Gaussian-Sampling.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numerical-mle-techniques">
+   Numerical MLE techniques
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="gaussian-sampling-and-use-of-maximal-likliehood-estimators">
+<h1>Gaussian Sampling and use of Maximal Likliehood Estimators<a class="headerlink" href="#gaussian-sampling-and-use-of-maximal-likliehood-estimators" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s sample <span class="math notranslate nohighlight">\(n\)</span> measurements from a Gaussian distribution with true mean <span class="math notranslate nohighlight">\(\mu\)</span> and true standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> that are unknown to us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="c1"># mean and standard deviation</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># sample the distribution</span>
+<span class="n">number_of_samples</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">number_of_samples</span><span class="p">)</span>
+<span class="n">samples</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First let’s determine the sample parameters: the sample mean and the sample standard deviation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get sample parameters</span>
+<span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="n">sample_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mean of the samples is </span><span class="si">{</span><span class="n">sample_mean</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The standard deviation of the samples is </span><span class="si">{</span><span class="n">sample_std</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean of the samples is 0.25202
+The standard deviation of the samples is 0.66093
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the previous notebooks, it is known that the maximal likeilhood estimators of a Gaussian distribution are</p>
+<div class="math notranslate nohighlight">
+\[
+\displaystyle \hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i \equiv \bar{x}~,
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\displaystyle \hat{\sigma} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(x_i - \hat{\mu}\right)^2} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(x_i - \bar{x}\,\right)^2}~.
+\]</div>
+<p><a class="reference external" href="http://www.numpy.org/">NumPy</a>’s methods for <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html"><span class="math notranslate nohighlight">\(\texttt{mean}\)</span></a> and <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html"><span class="math notranslate nohighlight">\(\texttt{std}\)</span></a> will return these, but let’s explicility check:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mle_mean</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">summation</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">summation</span> <span class="o">/</span> <span class="n">n</span>
+
+
+<span class="k">def</span> <span class="nf">mle_std</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">mle_mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">summation</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">summation</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+
+
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">mle_mean</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">-</span> <span class="n">sample_mean</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample mean is the MLE mean.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample mean is NOT the MLE mean.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">mle_std</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">-</span> <span class="n">sample_std</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample std is the MLE std.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample std is NOT the MLE std.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample mean is the MLE mean.
+Sample std is the MLE std.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we are confident our estimates of the true distribution mean and standard deviation are the best we can make with our samples let’s create a probability distribution function from the sample parameters,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_distribution</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">)</span>
+<span class="n">true_distribution</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and now let’s visuzlaize our data by plotting the sampled measurements with the sample (MLE) distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_bins</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">if</span> <span class="n">number_of_samples</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+    <span class="n">n_bins</span> <span class="o">=</span> <span class="n">number_of_samples</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">n_bins</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plot histogram of samples</span>
+<span class="n">hist_count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">samples</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>  <span class="c1"># Norm to keep distribution in view</span>
+<span class="c1"># Plot distribution using sample parameters</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sample_distribution</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="c1"># draw standard deviation in dashed lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">sample_mean</span> <span class="o">+</span> <span class="n">sample_std</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">sample_std</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sample_distribution</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="n">sample_std</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">-</span> <span class="n">sample_std</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sample_distribution</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Plot of distribution from samples&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;count (normalized to unit area)&quot;</span><span class="p">)</span>
+<span class="n">sample_window_w</span> <span class="o">=</span> <span class="n">sample_std</span> <span class="o">*</span> <span class="mf">1.5</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="n">sample_window_w</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">sample_window_w</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">hist_count</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">])</span>
+
+<span class="c1"># Legends</span>
+<span class="n">sample_patch</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Sample distribution: $f(x;\mu=</span><span class="si">{:.3f}</span><span class="s2">,\sigma=</span><span class="si">{:.3f}</span><span class="s2">)$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_std</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">data_patch</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Histogram of </span><span class="si">{</span><span class="n">number_of_samples</span><span class="si">}</span><span class="s2"> samples of the true distribution&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">data_patch</span><span class="p">,</span> <span class="n">sample_patch</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Sampling_15_0.png" src="../../_images/Gaussian-Sampling_15_0.png" />
+</div>
+</div>
+<p>Now that we have the sample distribution, let’s compare it to the true distribution and see how they well they agree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot distribution using sample parameters</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sample_distribution</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">true_distribution</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>  <span class="c1"># Plot true distribution</span>
+
+<span class="c1"># Axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Plot of  $f(x;\mu,\sigma)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$f(x;\mu,\sigma)$&quot;</span><span class="p">)</span>
+<span class="n">dist_window_w</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">mu</span> <span class="o">-</span> <span class="n">dist_window_w</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">dist_window_w</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">sample_distribution</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">true_distribution</span><span class="o">.</span><span class="n">max</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">sample_distribution</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">true_distribution</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">])</span>
+
+<span class="c1"># Legends</span>
+<span class="n">true_patch</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;True distribution: $f(x;\mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">,\sigma=</span><span class="si">{</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)$&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">true_patch</span><span class="p">,</span> <span class="n">sample_patch</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Sampling_17_0.png" src="../../_images/Gaussian-Sampling_17_0.png" />
+</div>
+</div>
+<p>To get a feel for how sample size affects the quality of the estimate vary the sample size (e.g., 5, 10, 100, 1000) and run the notebook multiple times for each sample size.</p>
+<div class="section" id="numerical-mle-techniques">
+<h2>Numerical MLE techniques<a class="headerlink" href="#numerical-mle-techniques" title="Permalink to this headline">¶</a></h2>
+<p>We arrived at the sample distribution parameters by finding the maximal estimators <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> analytically as the distribution is Gaussian. Alternatively, we could have (as you must in most cases) found them numerically by minimizing <span class="math notranslate nohighlight">\(-\ln L(\vec{x}; \hat{\vec{\theta}})\)</span>, which is</p>
+<div class="math notranslate nohighlight">
+\[
+\displaystyle -\ln L\left(\vec{x}; \hat{\mu}, \hat{\sigma}\right) = \frac{n}{2} \ln\left(2 \pi\right) + n \ln \hat{\sigma} + \frac{1}{2 \hat{\sigma}^2} \sum_{i=1}^{n} \left(x_i - \hat{\mu}\right)^2
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">negative_log_L</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mean_estimate</span><span class="p">,</span> <span class="n">std_estimate</span><span class="p">):</span>
+    <span class="n">summation</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean_estimate</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">std_estimate</span><span class="p">))</span>
+        <span class="o">+</span> <span class="p">(</span><span class="n">summation</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">std_estimate</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s use <a class="reference external" href="http://www.scipy-lectures.org/advanced/mathematical_optimization/#getting-started-1d-optimization">Brent’s method</a> for a scalar function to minimize the likelihood estimate and then visualize it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">min_L_mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">min_L_std</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">mean_estimator</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">brent</span><span class="p">(</span><span class="n">min_L_mean</span><span class="p">)</span>
+<span class="n">std_estimator</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">brent</span><span class="p">(</span><span class="n">min_L_std</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean estimator = </span><span class="si">{</span><span class="n">mean_estimator</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard deviation estimator = </span><span class="si">{</span><span class="n">std_estimator</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean estimator = 0.252023
+Standard deviation estimator = 0.660935
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1745/4262074354.py:6: RuntimeWarning: divide by zero encountered in log
+  + (n * np.log(std_estimate))
+/tmp/ipykernel_1745/4262074354.py:7: RuntimeWarning: divide by zero encountered in double_scalars
+  + (summation / (2 * (std_estimate ** 2)))
+/tmp/ipykernel_1745/4262074354.py:5: RuntimeWarning: invalid value encountered in double_scalars
+  (n * np.log(2 * np.pi) / 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Negative Log Likelihood curves</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">mean_estimator</span><span class="p">],</span> <span class="p">[</span><span class="n">min_L_mean</span><span class="p">(</span><span class="n">mean_estimator</span><span class="p">)],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$ vs. $\hat{\mu}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\hat{\mu}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_std</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">sample_std</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">std_estimator</span><span class="p">],</span> <span class="p">[</span><span class="n">min_L_std</span><span class="p">(</span><span class="n">std_estimator</span><span class="p">)],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$ vs. $\hat{\sigma}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\hat{\sigma}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_std</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">sample_std</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Sampling_24_0.png" src="../../_images/Gaussian-Sampling_24_0.png" />
+<img alt="../../_images/Gaussian-Sampling_24_1.png" src="../../_images/Gaussian-Sampling_24_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_L_mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sample_mean</span> <span class="o">-</span> <span class="n">x</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">ymin</span> <span class="o">=</span> <span class="n">min_L_mean</span><span class="p">(</span><span class="n">sample_mean</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.998</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="n">delta</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">delta</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">min_L_mean</span><span class="p">(</span><span class="n">sample_mean</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)])</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="n">delta</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">delta</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">theta</span><span class="p">,</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">mean_estimator</span><span class="p">],</span> <span class="p">[</span><span class="n">min_L_mean</span><span class="p">(</span><span class="n">mean_estimator</span><span class="p">)],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">min_L_mean</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">min_L_mean</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">min_L_mean</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="n">min_L_mean</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">min_L_mean</span><span class="p">(</span><span class="n">b</span><span class="p">)],</span> <span class="s2">&quot;wo&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$ vs. $\hat{\mu}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\hat{\mu}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2 Delta L: </span><span class="si">{</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">min_L_mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">min_L_mean</span><span class="p">(</span><span class="n">mean_estimator</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot_L_std</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sample_std</span> <span class="o">-</span> <span class="n">x</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">ymin</span> <span class="o">=</span> <span class="n">min_L_std</span><span class="p">(</span><span class="n">sample_std</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.998</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_std</span> <span class="o">-</span> <span class="n">delta</span><span class="p">,</span> <span class="n">sample_std</span> <span class="o">+</span> <span class="n">delta</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span> <span class="n">min_L_std</span><span class="p">(</span><span class="n">sample_std</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)])</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_std</span> <span class="o">-</span> <span class="n">delta</span><span class="p">,</span> <span class="n">sample_std</span> <span class="o">+</span> <span class="n">delta</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">theta</span><span class="p">,</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">std_estimator</span><span class="p">],</span> <span class="p">[</span><span class="n">min_L_std</span><span class="p">(</span><span class="n">std_estimator</span><span class="p">)],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">min_L_std</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">min_L_std</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">min_L_std</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="n">min_L_std</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">min_L_std</span><span class="p">(</span><span class="n">b</span><span class="p">)],</span> <span class="s2">&quot;wo&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$ vs. $\hat{\sigma}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\hat{\sigma}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\ln L(\vec</span><span class="si">{x}</span><span class="s2">;\hat{\mu}, \hat{\sigma})$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2 Delta L: </span><span class="si">{</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">min_L_std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">min_L_std</span><span class="p">(</span><span class="n">std_estimator</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To be able to quantify our estimates we can place uncertainties on them using our log-likelihood functions. As the log likelihood-ratio test shows us that</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle -2\ln\Lambda\left(\hat{\theta}\right) = 2 \Delta \left(-\ln L\right) = 2\, \ln\left(\frac{-L\left(\vec{x}; \hat{\vec{\theta}}\right)}{-L\left(\vec{x}; \hat{\vec{\theta}_0}\right)}\right) = 2 \left(-\ln L\left(\vec{x}; \hat{\vec{\theta}}\right) + \ln L\left(\vec{x}; \hat{\vec{\theta}_0}\right)\right)= s^2\)</span>,</p>
+<p>is approximatley distributed as <span class="math notranslate nohighlight">\(\chi^2\)</span> when the sample size <span class="math notranslate nohighlight">\(n\)</span> is large, then to find the <span class="math notranslate nohighlight">\(s\sigma\)</span> confidence level on our estimates we just vary our estimate <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> until <span class="math notranslate nohighlight">\(\displaystyle -2\ln\Lambda\left(\hat{\theta}\right) = s^2\)</span>. Use the sliders below to vary <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> to find the <span class="math notranslate nohighlight">\(1\sigma\)</span> uncertainties (~68% confidence levels).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interact</span><span class="p">(</span>
+    <span class="n">plot_L_mean</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+        <span class="nb">min</span><span class="o">=</span><span class="n">sample_mean</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">sample_mean</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">sample_mean</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "8d349f6d4b0b4123a67c31591853ad20"}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interact</span><span class="p">(</span>
+    <span class="n">plot_L_std</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+        <span class="nb">min</span><span class="o">=</span><span class="n">sample_std</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">sample_std</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">sample_std</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "f3a2d91edf364f94a27980fe449ece22"}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">negative_two_log_Lambda</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">negative_log_L</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">negative_log_L</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_Lambda_mean</span><span class="p">():</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">width</span><span class="p">])</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">theta</span><span class="p">,</span>
+        <span class="n">negative_two_log_Lambda</span><span class="p">(</span>
+            <span class="n">samples</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">,</span> <span class="n">mean_estimator</span><span class="p">,</span> <span class="n">std_estimator</span>
+        <span class="p">),</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">sample_mean</span><span class="p">],</span>
+        <span class="p">[</span>
+            <span class="n">negative_two_log_Lambda</span><span class="p">(</span>
+                <span class="n">samples</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">,</span> <span class="n">mean_estimator</span><span class="p">,</span> <span class="n">std_estimator</span>
+            <span class="p">)</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;ro&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-2\ln \,\Lambda(\hat{\mu})$ vs. $\hat{\mu}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\hat{\mu}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-2\ln \,\Lambda(\hat{\mu})$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">plot_Lambda_std</span><span class="p">():</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">sample_std</span> <span class="o">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">sample_std</span> <span class="o">+</span> <span class="n">width</span><span class="p">])</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_std</span> <span class="o">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">sample_std</span> <span class="o">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">theta</span><span class="p">,</span>
+        <span class="n">negative_two_log_Lambda</span><span class="p">(</span>
+            <span class="n">samples</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">mean_estimator</span><span class="p">,</span> <span class="n">std_estimator</span>
+        <span class="p">),</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">sample_std</span><span class="p">],</span>
+        <span class="p">[</span>
+            <span class="n">negative_two_log_Lambda</span><span class="p">(</span>
+                <span class="n">samples</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">,</span> <span class="n">mean_estimator</span><span class="p">,</span> <span class="n">std_estimator</span>
+            <span class="p">)</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;ro&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-2\ln \,\Lambda(\hat{\sigma})$ vs. $\hat{\sigma}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\hat{\sigma}$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-2\ln \,\Lambda(\hat{\sigma})$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also visualize this by plotting <span class="math notranslate nohighlight">\(-2\ln\Lambda\left(\hat{\theta}\right)\)</span> vs <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_Lambda_mean</span><span class="p">()</span>
+<span class="n">plot_Lambda_std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Sampling_32_0.png" src="../../_images/Gaussian-Sampling_32_0.png" />
+<img alt="../../_images/Gaussian-Sampling_32_1.png" src="../../_images/Gaussian-Sampling_32_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"aea56e1306d9406da51f4f3412f16e2a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0905a807837d440593ae338b020afa9e": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "7daa8d7db080499e8d54c1976642edd0": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "x", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_aea56e1306d9406da51f4f3412f16e2a", "max": 0.40202270185618105, "min": 0.25202270185618103, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.001, "style": "IPY_MODEL_0905a807837d440593ae338b020afa9e", "value": 0.25202270185618103}}, "3e02858485244be191b6cc89e8a8c0c4": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8d349f6d4b0b4123a67c31591853ad20": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_7daa8d7db080499e8d54c1976642edd0", "IPY_MODEL_1eab9a2f8a2848fc8489b4f6d6a520ba"], "layout": "IPY_MODEL_3e02858485244be191b6cc89e8a8c0c4"}}, "ca628aefc3b04220aa9d23cfba842d1a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1eab9a2f8a2848fc8489b4f6d6a520ba": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ca628aefc3b04220aa9d23cfba842d1a", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}, {"output_type": "stream", "name": "stdout", "text": "2 Delta L: 0.0\n"}]}}, "d3644afe928e48d5a80e8bce3a82fb08": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7af153892b07432c81e163613286d415": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "9eb5702737664129916a1081a1471095": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "x", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_d3644afe928e48d5a80e8bce3a82fb08", "max": 0.810934666172889, "min": 0.660934666172889, "orientation": "horizontal", "readout": true, "readout_format": ".2f", "step": 0.001, "style": "IPY_MODEL_7af153892b07432c81e163613286d415", "value": 0.660934666172889}}, "2a78f8e52fcc4d53980d15e26ad282d7": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f3a2d91edf364f94a27980fe449ece22": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_9eb5702737664129916a1081a1471095", "IPY_MODEL_75118e78ab2c4ce5a54dd06cd90107ff"], "layout": "IPY_MODEL_2a78f8e52fcc4d53980d15e26ad282d7"}}, "3b3c951a140f447cbe7420d694c18d64": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "75118e78ab2c4ce5a54dd06cd90107ff": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_3b3c951a140f447cbe7420d694c18d64", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "iVBORw0KGgoAAAANSUhEUgAAAZUAAAEfCAYAAACJcFuFAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8/fFQqAAAACXBIWXMAAAsTAAALEwEAmpwYAAA6oElEQVR4nO3deZyNdf/H8ddnxjKWcdvGkmrIHmowablDVBIqZG3BLUvdlIQo0iJu3RUlFdrQnShRJPtyS91o7HtEWRJjmdvOGJ/fH+ea+Z3mnn3OzHXOmc/z8TiPc851Xd/rvC+n5nOu7fsVVcUYY4zxhRC3AxhjjAkeVlSMMcb4jBUVY4wxPmNFxRhjjM9YUTHGGOMzVlSMMcb4jBUVY4wxPmNFxRg/IiItRKRFbrXLSf6YyeQ8sZsfjck5IjIG+Keq/pGBZUsDi5y3d6vq8Qx+Rpba5SR/zGRyhxUVY3xIRAYATbwmVQSmquo/M9D2XWA2EArcr6p9MviZWWqXk/wxk8kdVlRMniIivwI9VHWJj9b3D+CIqr6Vyvw+wARVTfDF52WGiKwF/qaq23L7s03eZedUjEmDiJQWERWRCinMiwC6ABNTa6+q77pRUBxvAK+49Nkmj7KiYkzaooBYVT2UwrxuwHeqej5XE2XcHKCJiJRzO4jJO6yomDxLRH4VkYEisllE/isiM0QkLNliUcCmVFZxL/DvZOv8p4h87fX+dRFZKiIFROQ9EXkvhRxDRWSC1/sSIhKfQpbk7fKLyEhnO+KdPSoVkc0AqnoBWAfck0LbwSIyM9m0t0VknNf8QyJyWkR2icidaWXJaCYT/PK5HcAYl3UAmgMXgB/w7H1M8JofBWxMpW0dYFeyaa8Be0WkLnCzs+7bVfUS8Pc01rMi2WfucopCWl4FGgMNgRPAN8ApYKDXMjuAG1NoOx14UUTCVfW0iITi+bdoIyLVgb7ATar6u4hUxHPCPSMykskEMdtTMXndOFX9XVVPAHPx/EH3FkXqRaU4cNp7gnPp7FhgCvAc0EJV/5tOhjrJPiOK1PeOABCRcOAp4FFVPaCqZ4GvgJKqutdr0dNOzj9R1d+A9UAbZ1JT4JyqrgYSgILA9SKSX1V/VdVf0tmGzGQyQcyKigkKIrLC61BL8seqNJp63z9yDijqtc4woDqwIZW2J4HwFKZvwFMonlPVA+nkLgBUBrwPD91I6oUsUSNgr6ru9ppWgj9vD06+uFTWMQ3o7Lx+yHmPqu4BngZeAo6KyHQRuSqdPJnJZIKYFRUTFFT1DlWVVB63Z3G1tYF4/vcQV6LNQDXvCSJSB3gfz55K9wx8Rk3gkKqec9oLcAfp7KkAEXiKWuLnCp69jm9TWH9q6/oSuENErnbaTkucoarTnH+3SEDxHNZLT0YzmSBmRcWY1EUB24H8IhLmPAp6zf8Oz/kDAJzLjucCj+M5f1JHRO7wmj9ZRCYn+4wbgDIiUllECgEj8Pwh/zWddluBeiIS5bT7B54//jO82oUB9YHFKW2cqsbiOZfzCbBPVXc47aqLSFNnWy8A54ErKf4LZTKTCX5WVIxJXRSeP8rnvR7bveZPBVqISCERKYanyIxR1TnOnsfrwEiv5a/BczGAtzrAQjx/3PfgOQdyEBiaVjtVjXHW/R2wFyiH5/xNvNdi9wErVPX3NLZxGnAXXnspeM6njAaO4Tl0VQbP+SEARGS+iDyffEUZzGSCnN1Rb0w2iMgo4Ghqd9R7LVcAz2GoG7z/yIrIfOBDVf0qM+0ymG0N8Jiqbs1MO2Oyw4qKMS4SkYNAM1Xdnu7CxgQAKyrGuERESgBHgCJ2iMgECysqxhhjfMZO1BtjjPEZKyrGGGN8Jk/3/VW6dGmtWLGi2zEyZfv27Zw/f55q1aoRHp7SzdzGGJMz4uLi+OWXXwCOqWpESsvk6aJSsWJFYmJi3I6RKf369WPcuHE89NBDvPjii27HMcbkEarKzTffnFhUfkttOTv8FWDuuOMOAJYvX+5uEGNMnrJ48WJ++uknIiJS3EFJYkUlwDRu3BgRYfXq1Vy4kF7P6MYYk32qyogRIwAYMGBAmstaUQkwJUuW5IYbbuDixYusXr3a7TjGmDxg5cqVrFq1ihIlSvD3v6c2LJCHa0XFGRlui4hsFJEYZ9rrIrLTGYlvtogUT6Vtc2c0uj0iMsRreiURWeNMn+F0cRF07BCYMSY3vfrqqwA8/fTT6V4g5PaeShNVjVLVaOf9YqC2qt4A/IxXJ3aJnBHq3sUzlOv1QGcRud6Z/RowVlWr4OmC+7Gc3gA3NGnSBLCiYozJeatXr2bJkiWEh4fz5JNPpru820XlT1R1kapedt6uBq5OYbEGwB5V3esM0TodeMAZu6EpkDju9hSgdQ5HdkXjxo0JCQlh9erVnDlzxu04xpgglriX0rdvX0qUKJHu8m4WFQUWicg6EemVwvzuwPwUplcAvEfTO+hMKwXEeRWlxOlBp3jx4kRHRxMfH8/333/vdhxjTJDasGED8+bNo3DhwvTv3z9DbdwsKreraj08h7H6iEijxBkiMhS4DHzm6w8VkV4iEiMiMbGxsb5efa656667AFiyZInLSYwxwWrkSM9wQI8//ni6lxIncq2oqOoh5/koMBvPYS1EpBvQCnhYU+7t8hCeQYsSXe1MOw4UF5F8yaYn/9xJqhqtqtEZ/UfyR1ZUjDE5adu2bXz11VcULFiQgQMHZridK0VFRIqISHjia6AZsFVEmgPPAvcnjtmdgp+Aqs6VXgWATsAcpwAtB9o5y3UFvsnJ7XDTrbfeSqFChdi8eTNHjhxxO44xJsiMGjUKgB49elC+fPkMt3NrT6UssEpENgFrgXmqugAYD4QDi51LjScAiMhVIvIdgHPOpC+eIVh3AF+o6jZnvYOBZ0RkD55zLB/l5kblprCwMBo2bAjAsmXLXE5jjAkmu3fvZvr06eTLl49nn302U21d6ftLVfcCN6YwvUoqy/8OtPB6/x2ecbBTWm8D3yX1b3feeSeLFi1i6dKldO7c2e04xpggMXr0aK5cucLf/vY3rr322ky19atLik3mJJ5XWbx4MTbYmjHGF3777TemTp1KSEgIQ4YMSb9BMlZUAlhUVBQlS5Zk//79iT2HGmNMtvzjH//g8uXLdO7cmSpVUjx4lCYrKgEsJCSEO++8E7CrwIwx2bd//34+/vhjQkJCGDZsWJbWYUUlwNmlxcYYX/nHP/5BfHw8nTp1okaNGllahxWVAJdYVJYtW0ZCQoLLaYwxgWr//v189NFHiAgvvPBCltdjRSXAXXfddVSqVImTJ0+yYcMGt+MYYwJU4l5K586ds7yXAlZUgoIdAjPGZMeBAweS9lKyei4lkRWVIGBFxRiTHd7nUmrWrJmtdUlevr8hOjpaY2Ji3I6RbceOHSMiIoKCBQty8uRJChUq5HYkY0yAOHDgAJUrV+by5cts27YtQ0VFRNZ5jYP1J7anEgRKly5N3bp1uXjxonWFb4zJlNGjRxMfH0/Hjh2zvZcCVlSCRvPmzQFYsGCBy0mMMYHiwIEDfPjhh9m+4subFZUgYUXFGJNZo0eP5tKlS3Ts2JHrr78+/QYZYOdUguCcCkB8fDylSpXi9OnT/Pbbb5nuBM4Yk7ccPHiQypUrEx8fz9atWzNVVOycSh6QP3/+pC5bFi5c6HIaY4y/S9xL6dChg8/2UsCKSlCxQ2DGmIw4ePAgH3zwgU/PpSSyohJE7rnnHsBzv0p8fLzLaYwx/ipxL6V9+/bUqlXLp+u2ohJEKlasSI0aNTh16hSrV692O44xxg8dOnQox/ZSwIpK0LFDYMaYtIwaNYpLly7Rrl07ateu7fP1W1EJMlZUjDGp+e2335L2Ul566aUc+QxXioqI/CoiW0Rko4jEONPai8g2EbkiIileqiYi1Z02iY9TIvK0M+8lETnkNa9FSusIdo0aNSIsLIz169dz5MgRt+MYY/zIiBEjiI+P56GHHvLpFV/e3NxTaaKqUV7XOm8F2gIrU2ugqrucNlFAfeAcMNtrkbGJ81X1u5wK7s8KFSpE48aNAc/Y9cYYA7B7924mT55MaGgoL774Yo59jt8c/lLVHaq6KxNN7gR+UdXfcipToLJDYMaY5F5++WUSEhLo2rUrVatWzbHPcauoKLBIRNaJSK8srqMT8HmyaX1FZLOIfCwiJbIXMXAlFpWFCxdy5coVl9MYY9y2fft2pk2bRv78+XPkii9vbhWV21W1HnAv0EdEGmWmsYgUAO4HvvSa/D5QGYgCDgNvptK2l4jEiEhMbGxsVrL7verVqxMZGcmxY8dYv36923GMMS578cUXUVV69uxJxYoVc/SzXCkqqnrIeT6K55xIg0yu4l5gvaomnYlW1SOqmqCqV4APUlunqk5S1WhVjY6IiMjaBvg5EUnaW5k/f77LaYwxbtq4cSMzZ86kYMGCPP/88zn+ebleVESkiIiEJ74GmuE5SZ8ZnUl26EtEynu9bZOFdQaVFi08F7/NmzfP5STGGDcNHz4cgL///e9UqFAhxz8v13spFpHr+P8rtvIB01R1pIi0Ad4BIoA4YKOq3iMiVwEfqmoLp30RYD9wnar+12u9n+I59KXAr0BvVT2cVpZg6qU4ubNnz1KqVCkuXbrE4cOHKVu2rNuRjDG5bM2aNdxyyy0ULlyYffv2UaZMGZ+sN61eivP55BMyQVX3AjemMH02f748OHH670ALr/dngVIpLPeob5MGtiJFitC0aVPmz5/P/Pnz6datm9uRjDG5LHEv5amnnvJZQUmP31xSbHyvVatWAHz77bcuJzHG5LaVK1eyaNEiihUrxqBBg3Ltc62oBLGWLVsCnkuLL1265HIaY0xuUdWkS4efeeYZSpYsmWufbUUliEVGRlKnTh3OnDnDypWpdlRgjAkyS5cuZeXKlZQoUYKnn346Vz/bikqQs0NgxuQtqsqwYcMAePbZZ/nLX/6Sq59vRSXIJRaVuXPnkttX+hljct/cuXNZs2YNERER9O3bN9c/34pKkLv55pspVaoUe/fuZdeuzHStZowJNAkJCUk3OA4bNoyiRYvmegYrKkEuNDQ06UZIOwRmTHD77LPP2LZtG5GRkfTu3duVDFZU8gA7r2JM8Lt48WJSl/avvPIKBQsWdCWHFZU8oFmzZuTLl49Vq1Zx8uRJt+MYY3LApEmT+PXXX6lVqxYPP/ywazmsqOQBxYsXp2HDhiQkJNgYK8YEodOnTzNixAgARo4cSWhoqGtZrKjkEXYIzJjg9dZbbxEbG8stt9zC/fff72oWKyp5RGJR+e6774iPj3c5jTHGV44dO8brr78OwOjRoxERV/NYUckjqlWrRs2aNYmLi7O7640JIqNHj+b06dM0b96cxo0bux3Hikpe0rp1awC+/vprV3MYY3zjwIEDjB8/HoBRo0a5nMbDikoe4l1U7O56YwLfyy+/zMWLF+nUqRN169Z1Ow5gRSVPiY6OpkKFChw8eJB169a5HccYkw07d+7kk08+IV++fElXfvkDKyp5SEhICA888AAAs2f/z3hoxpgAMmzYMK5cucJjjz1GlSpV3I6TxIpKHtOmTRvAzqsYE8h++uknvvrqK8LCwpJGd/QXVlTymMaNG1O8eHG2b9/Ozz//7HYcY0wmqSrPPfccAP369eOqq65yOdGfuVJURORXEdkiIhtFJMaZ1l5EtonIFRGJzkxbZ3pJEVksIrud5xK5sS2BJn/+/En3rNjeijGBZ+HChSxdupTixYvz7LPPuh3nf7i5p9JEVaNUNbGAbAXaAhm5iSJ5W4AhwFJVrQosdd6bFNilxcYEpoSEhKTx5ocNG5arwwRnlN8c/lLVHaqanQE/HgCmOK+nAK2zHSpINW/enLCwMFavXs3hw4fdjmOMyaApU6awdetWIiMj6dOnj9txUuRWUVFgkYisE5FePmpbVlUT/0L+AZT1RdBgVKRIEe6++25UlTlz5rgdxxiTAefOneOFF14APDc6hoWFuZwoZW4VldtVtR5wL9BHRBr5sq167uxL8e4+EeklIjEiEhMbG5uV7EEh8RCYXVpsTGAYO3Ysv//+O/Xq1aNTp05ux0mVK0VFVQ85z0eB2UADH7Q9IiLlAZzno6m0n6Sq0aoaHRERkfWNCHD3338/oaGhLFu2zMZYMcbPHT16lNdeew2AN954g5AQvzlz8T9yPZmIFBGR8MTXQDM8J+mz23YO0NV53RX4xpe5g03p0qW54447iI+P55tv7J/KGH/2yiuvcPr0aVq2bEmTJk3cjpMmN8pdWWCViGwC1gLzVHWBiLQRkYPArcA8EVkIICJXich3abV15o0G7haR3cBdznuThvbt2wPw5ZdfupzEGJOan3/+mYkTJxISEpK0t+LPJC93LBgdHa0xMTHpLxikjh49Svny5QkNDeXo0aMUL17c7UjGmGQefPBBZs2aRY8ePfjggw/cjgOAiKxLdktHEv89MGdyXJkyZewQmDF+7IcffmDWrFkULlyYl19+2e04GWJFJY+zQ2DG+CdVTbrRccCAAX7XHUtqrKjkcW3btiUkJIRFixYRFxfndhxjjGPWrFn85z//oUyZMknFJRBYUcnjypQpQ+PGjYmPj7cbIY3xE/Hx8QwZ4ulp6qWXXiI8PNzlRBlnRcXQrl07wA6BGeMv3nvvPfbs2UO1atXo0aOH23EyxYqKoW3btogIixYt4r///a/bcYzJ044fP85LL70EeG50zJ8/v7uBMsmKiqFcuXI0atSIS5cu2SEwY1z28ssvExcXx1133ZU0TEUgsaJiALsKzBh/sGPHDt577z1CQkIYM2YMIuJ2pEyzomIAzw1WISEhLFy40PoCM8YlAwYMICEhgZ49e1KnTh2342RJloqK0wdXqK/DGPeUK1eOJk2acOnSJWbNmuV2HGPynAULFjB//nyKFSvGK6+84nacLMtQURGREBF5SETmichRYCdwWES2i8jrIlIlZ2Oa3PDQQw8BMG3aNJeTGJO3XL58mWeeeQbwjOhYpkwZlxNlXUb3VJYDlYHngHKqeo2qlgFuB1YDr4nIIzmU0eSStm3bUqBAAZYvX24jQhqTiyZOnMiOHTu47rrreOqpp9yOky0ZLSp3qeoIoK2qXkmcqKonVPUrVX0QmJEjCU2uKV68OC1btkRVmTHDvk5jcsPJkyd58cUXAc8lxAULFnQ5UfZkqKioarzzcriIvCYiH4jIEyJSIoVlTACzQ2DG5K4RI0Zw/PhxGjdunDQiayBLs6iISC0R+cxrkgIXgIXANcCPInJjDuYzuaxly5aEh4fz008/sXv3brfjGBPUfv75Z9555x1EhLFjxwbkJcTJpbensgQY6vV+p6q+qKozVfV54AFgbI6lM7muUKFCtG3bFoDPP//c5TTGBLdBgwZx+fJlunfvTt26dd2O4xPpFZVmwEiv98dEpH7iG1X9Gci7A70HKe9DYHl5EDdjctLixYuZM2cORYsW5dVXX3U7js/kS2umqm4BHvaa9BQwXUTWAVuAG4B9ORfPuKFp06aUKVOGXbt2sWHDBurVq+d2JGOCyqVLl5Ku8ho6dCjlypVzOZHvZOrmR1XdBEQBicdFlgOdfZzJuCxfvnx07NgRsBP2xuSEd955h507d1K1alX69+/vdhyfyvQd9ap6UVXnqeprqvqhqp7N7DpE5FcR2SIiG0UkxpnWXkS2icgVEUlx7GMRuUZEljs3XW4TkX5e814SkUPOOjeKSIvM5jL/r3Nnz2+Fzz//nISEBJfTGBM8Dh8+nDQ08FtvvRXwlxAn52bfX01UNUpVEwvIVqAtsDKNNpeBAap6PXAL0EdErveaP9ZZZ5SqfpczsfOGW265hcqVK/P777+zdOlSt+MYEzSGDBnC6dOnadWqFS1aBN9v32wVFREpLyI+KbOqukNVd6WzzGFVXe+8Pg3sACr44vPNn4kIXbt2BWDy5MnuhjEmSPz4449MnTqVAgUKMHZscF44m909lU+BnSLyRibbKbBIRNaJSK+sfLCIVATqAmu8JvcVkc0i8rH3jZkmax599FEAZs+ebYN3GZNNCQkJPPnkkwAMHDiQKlWCs8vEbBUVVb0LuA74JJNNb1fVesC9eA5hNcpMYxEpCnwFPK2qp5zJ7+PpnywKOAy8mUrbXiISIyIxsbGxmYydt1SsWJE77riDCxcu2DgrxmTTRx99xPr167n66qt5/vnn3Y6TY7J9TkU9tmWyzSHn+SgwG2iQ0bYikh9PQflMVZP6aFfVI6qa4PRN9kFq61TVSaoararRERF2i016unXrBtghMGOy48SJE0mF5I033qBIkSIuJ8o5meqmxbli6zMRGSwi94rI1SIyNK11pLDOIiISnvgazw2WWzPYVoCPgB2qOibZvPJeb9tkdJ0mbQ8++CBFihThhx9+YM+ePW7HMSYgDR8+nOPHj3PHHXfQoUMHt+PkqMx209IYz17AeaATnj/cmb18oSywSkQ2AWuBeaq6QETaiMhB4FZgnogsBBCRq0Qk8UquvwKPAk1TuHT4n07R2ww0AYLr4m+XFC1alAcffBCAqVOnupzGmMCzadMm3n//fUJDQxk3blxQ9O+VFkmrGw4RqQMMUdWHU5lfFRimql1zKF+Oio6O1piYGLdj+L3ly5fTtGlTrr32Wvbt20dIiI1CbUxGqCqNGzfm+++/58knn2TcuHFuR/IJEVnndTvIn6T510FVt3gXFBGplmz+bjxdtZgg1rhxYyIjI9m/fz///ve/3Y5jTMD49NNP+f7774mIiEi64THYZfYn50QR2S8i/xGRiSIyBdgqIoVzIpzxDyEhIUmXF0+ZMsXlNMYEhhMnTjBw4EDAc3K+RIm8cZdDZvv+aqKq1wIdgW+BPUAhYKOI7MyBfMZPJN4I+eWXX3Lq1Kl0ljbGPP/888TGxtKoUaOkH2V5QZYOjqvqflWdq6ojVLWdqlYDUjy+ZoJDlSpVaNSoEefOnbNxVoxJx5o1a5g0aRL58uXjvffeC/qT8958dsZVVc/4al3GP/Xq5en84IMPPnA5iTH+6/Llyzz++OOoKgMGDKBWrVpuR8pVmSoqIlIu2Xuf9f1l/N+DDz5IiRIlWLduHevXr3c7jjF+6b333mPjxo1ERkbywgsvuB0n12V2T+WjZO+z2veXCUBhYWFJx4Ztb8WY//X7778zbNgwAMaNGxfUd86nJrMn6lsme5/Vvr9MgOrZsycAn332GWfPZnooHWOC2jPPPMPp06e5//77uf/++92O44r0ummpICKjEi8ZFpG3JdkZp6z0/WUCV+3atbn11ls5ffo0X3zxhdtxjPEbixcvZsaMGRQqVIi3337b7TiuSW9PpQ5wI/9/ZddpYI7TZxcico+I/JCD+YwfStxbmTRpkstJjPEPFy5c4O9//zvg6eerYsWK7gZyUXp31C8ATqnqSuf9MDzj069wiskzwJAcT2n8SocOHShWrBirV69m61brt9OYUaNGsWfPHq6//nqeeeYZt+O4KrNXf90J9ATOAqWBp1T1+5wIZvxXkSJFePhhT+89dsLe5HXbtm1j9OjRAEyYMIECBQq4nMhdGSkq3teODgVeUNU7gHbADBFpmhPBjH9LPAQ2depUzp0753IaY9yRkJBAjx49iI+Pp3fv3jRs2NDtSK5Lt6io6uter5uq6irn9RY8Ize+mnPxjL+qW7cuDRo0IC4uzu6wN3nW+++/z+rVqylfvjyvvfaa23H8QoYOfyW/4iuRqh4G7kxrGRO8+vbtC8D48eNJawgFY4LRgQMHeO655wB49913+ctf/uJyIv+Q0XMqy0XkSRG51nuiiBQAbnV6Kw7IMVVM1rVv356IiAg2btzIjz/+6HYcY3KNqtKnTx/OnDlDmzZtaNOmjduR/EZGi0pzIAH4XER+F5HtIrIX2A10Bt5S1ck5lNH4qbCwMHr06AF4fqkZk1fMnDmTuXPnUqxYMcaPH+92HL+S5siPKTYQyY/nyq/zqhqXE6Fyi438mH379++nUqVKhISEsH//fsqXL+92JGNy1MmTJ6lZsyZHjhxhwoQJ9O7d2+1IuS7LIz+mRFXjVfVwYkGxmx/ztmuvvZYHHniAy5cv2+XFJk8YNGgQR44coWHDhklXQZr/54uu76/KSiMR+VVEtojIRhGJcaa1F5FtInJFRFIdn0VEmovILhHZIyJDvKZXEpE1zvQZzjkfk8P69OkDeK7Rj4+PdzmNMTlnxYoVfPTRRxQoUIBJkyYREuKz0UOCRkav/npHRHqJyK0iEp5sdnYu+2miqlFeu1FbgbbAyjSyhALv4rmc+Xqgs4hc78x+DRirqlWAk8Bj2chmMqhp06bUqFGDw4cP8/XXX7sdx5gccfbs2aRziMOGDaNGjRouJ/JPGS2zW/D0AzYa+FVE9onIHBEZCSQvMlmmqjtUdVc6izUA9qjqXlW9BEwHHnAuaW4KzHSWmwK09lU2kzoRSbq8+J133nE5jTE5Y+jQofzyyy/ccMMNDB482O04fitDRUVVJ6nqk6raWFVLAQ2B94FTwMIsfrYCi0RknYj0ykS7CsABr/cHnWmlgDhVvZxsuskFXbp0ITw8nO+//94G8DJB5/vvv2fcuHGEhoYyefLkPN8VS1qyOkb9QVWdr6qvqeojWfzs21W1Hp7DWH1EpFEW15MpzmG8GBGJiY2NzY2PzBPCw8OTDg2MGTPG5TTG+M65c+fo3r07qsrzzz9P3bp13Y7k11w7y6Sqh5zno8BsPIe1MuIQcI3X+6udaceB4iKSL9n05J87SVWjVTU6IiIiq/FNCvr160doaCgzZszg4MGDbscxxieGDh3Knj17qFOnTtKojiZ1me2luKCIPCQiz4vI8MRHZj9URIoknvB3xmZphuckfUb8BFR1rvQqAHQC5qjnhpvleDq6BM8d/t9kNpvJusjISNq1a8fly5cZN26c23GMybZVq1bx9ttvExoayieffGKHvTIgs3sq3wAPAJfxdH+f+MisssAqEdkErAXmqeoCEWkjIgeBW4F5IrIQQESuEpHvAJxzJn3xnMvZAXzhNfLkYOAZEdmD5xzLR1nIZrJhwIABgGcAr9OnT7ucxpis8z7sNWTIEOrXr+92pICQqTvqRWSrqtbOwTy5yu6ozxmNGjXi+++/Z+zYsTz99NNuxzEmSwYMGMCYMWOoXbs2MTExFCxY0O1IfsOXd9T/KCJ1fJDJBLHEvZW33nqLy5cvp7O0Mf7nxx9/ZOzYsUmHvaygZFxmi8rtwDrnbvbNzh3xm3MimAlc9913H1WrVuW3335j1qxZbscxJlPOnDlD165dUVUGDx5MdHSqnXuYFGS2qNwLVMVzYv0+oJXzbEySkJAQ+vfvD8Cbb75pY62YgDJw4MCkq72GD8/0dUh5XqaKiqr+ltIjp8KZwNW1a1dKlSrF2rVrWbFihdtxjMmQefPmMXHiRAoUKMC//vUvO+yVBRnt++u0iJzyepz2fs7pkCbwFC5cOOkk/ciRI90NY0wGxMbG8thjnu4CR44cyQ033OByosCU0W5awlW1mNcj3Ps5p0OawNSnTx/Cw8NZunQpa9ascTuOMalSVXr16sWRI0do3Lhx0uFbk3lZuqNeROw8iklXiRIlkrrFHzVqlMtpjEndlClT+PrrrwkPD2fKlCmEhoa6HSlgZbWbFjueYTKkf//+hIWFMWfOHLZs2eJ2HGP+x759+3jqqacAGD9+PJGRkS4nCmxZLSri0xQmaJUpUyZpdDzbWzH+JiEhgS5dunD69GkefPBBHn30UbcjBbysFhW7RtRk2KBBg8ifPz9ffPEFu3fvdjuOMUlef/11Vq1aRbly5ZgwYQKeYZlMdthYmCbHXXPNNXTp0oUrV64wevRot+MYA8DatWt54YUXAPj4448pXbq0y4mCgxUVkysGDx5MSEgIU6dOZd++fW7HMXncqVOn6Ny5M5cvX6Zfv37ce++9bkcKGlktKkd8msIEvapVq/LQQw9x+fJlRowY4XYck4epKo8//jh79+4lKiqK1157ze1IQSWrIz/e7esgJvi9+OKLhIaGMnXqVDu3YlwzZcoUPv/8c4oUKcL06dPtrnkfs8NfJtdUqVKFbt26kZCQwMsvv+x2HJMH7dq1i759+wKey4erV6/ucqLgY0XF5KoXXniB/PnzM23aNLZv3+52HJOHXLx4kc6dO3P27Fk6d+5M165d3Y4UlKyomFwVGRlJjx49UFVeeuklt+OYPGTIkCFs2LCBSpUq2eXDOciKisl1Q4cOpWDBgnz55Zds2rTJ7TgmD/j222956623yJcvH9OnT6dYMeuyMKdYUTG5rkKFCjzxxBMADBs2zOU0Jtjt27cv6U75kSNH0qBBA5cTBTdXioqI/OqMGrlRRGKcaSVFZLGI7HaeS6TQronTJvFxQURaO/Mmi8g+r3lRubtVJjOGDBlC0aJF+fbbb/n3v//tdhwTpC5evEj79u2Ji4vjvvvuY+DAgW5HCnpu7qk0UdUoVU0cq3MIsFRVqwJLnfd/oqrLnTZRQFPgHLDIa5FBifNVdWPOxjfZUbZsWQYNGgR4unGx0SFNTujfvz/r1q2jYsWKTJkyhZAQOziT0/zpX/gBYIrzegrQOp3l2wHzVfVcToYyOWfAgAGUK1eOn376iS+//NLtOCbIfPbZZ7z//vsUKFCAmTNnUqLE/xz8MDnAraKiwCIRWScivZxpZVX1sPP6D6BsOuvoBHyebNpIEdksImNFxO5o8nNFihThlVdeAeC5557j4sWLLicywWL79u306uX50zJu3Djq16/vcqK8w62icruq1gPuBfqISCPvmeo5FpLq8RARKQ/UARZ6TX4OqAHcBJQEBqfStpeIxIhITGxsbPa2wmTb3/72N2rWrMnevXuZMGGC23FMEDhz5gwPPvgg586d45FHHkkqLiZ3uFJUVPWQ83wUmA00AI44xSKxaBxNYxUdgNmqGu+1zsPqcRH4xFlnSp89SVWjVTU6IiLCNxtksixfvnxJfS+NGDGCuLg4dwOZgKaq9OzZk507d1KrVi27H8UFuV5URKSIiIQnvgaaAVuBOUDiLa5dgW/SWE1nkh368ipIgud8zFafBjc5plWrVjRq1Ijjx49bZ5MmW958802mT59O0aJF+fLLLylSpIjbkfIcN/ZUygKrRGQTsBaYp6oLgNHA3SKyG7jLeY+IRIvIh4mNRaQicA2Q/DrUz0RkC7AFKA28mtMbYnxDRBgzZgwiwrhx49i5c6fbkUwAWrhwIYMHe456T506lZo1a7qcKG+SvHwpZ3R0tMbExLgdwzh69erFBx98QLNmzViwYIEdtjAZtmfPHm666Sbi4uIYPny4dViaw0RkndftIH/iT5cUmzxu5MiRFC9enEWLFjF37ly345gAcebMGVq3bp10g+OLL77odqQ8zYqK8RsRERFJlxj379+fCxcuuJzI+DtVpWvXrmzbto0aNWrwr3/9y25wdJn96xu/8sQTT1CrVi327t3LmDFj3I5j/NyoUaOYNWsWxYoV45tvvrGOIv2AFRXjV/Lly8e4ceMAz+Gw3377zeVExl/Nnj2bF154ARFh2rRpVKtWze1IBisqxg81bdqUDh06cO7cOfr06WP9gpn/sW7dOh5++GFUlZEjR9KyZUu3IxmHFRXjl95++23+8pe/MG/ePGbOnOl2HONHDh48yH333cf58+fp1q0bQ4b8T9+zxkVWVIxfKleuXNKd9k899ZTdaW8Az5VerVq14vDhwzRu3JiJEyfaped+xoqK8Vs9e/bkr3/9K3/88Yf9GjUkJCTQuXNnNm3aRNWqVZk1axYFChRwO5ZJxoqK8VshISFMnDiR/PnzM3HiRFatWuV2JOOiQYMG8e2331KyZEnmzZtHyZIl3Y5kUmBFxfi1WrVqJXW90aNHD86fP+9yIuOGt956i7Fjx5I/f35mzZpF1apV3Y5kUmFFxfi9oUOHUrNmTXbt2mVj2udB06dPp3///gB89NFHNG7c2OVEJi1WVIzfCwsLY8qUKYSGhjJ27FhWrlzpdiSTS5YtW0aXLl0AeO2113j00UddTmTSY0XFBISbbrqJ559/HlWlW7dunDlzxu1IJodt2LCB1q1bEx8fT79+/Rg0aJDbkUwGWFExAWPYsGFERUWxb98++wMT5Pbt28e9997L6dOn6dixY9LQCMb/WVExAaNAgQJMnTqV/PnzM2HCBBYsWOB2JJMDjhw5wj333MORI0do2rQpU6ZMsU4iA4h9Uyag1KlTJ2l0yC5dunD48GGXExlfOnHiBHfffTe7d+8mKiqK2bNnU7BgQbdjmUywomICzsCBA7nzzjuJjY3l0Ucf5cqVK25HMj5w6tQpmjdvzpYtW6hevToLFy60XocDkBUVE3BCQ0P59NNPiYiIYOnSpYwePdrtSCabzp49S8uWLfnpp5+oVKkSS5cupUyZMm7HMllgRcUEpPLly/Ppp58CMHz4cH744QeXE5msunDhAm3atGHVqlVcffXVLF26lAoVKrgdy2SRa0VFRH4VkS0islFEYpxpJUVksYjsdp5LpNI2wWm3UUTmeE2vJCJrRGSPiMwQEesYKIjdc889PPvss0l9Qh07dsztSCaTLl68SIcOHVi8eDFlypRhyZIlVKpUye1YJhvc3lNpoqpRqhrtvB8CLFXVqsBS531KzjvtolT1fq/prwFjVbUKcBJ4LMeSG7/w6quvcsstt3DgwAE6duzI5cuX3Y5kMujChQu0bduWuXPnUrJkSZYsWUL16tXdjmWyye2iktwDwBTn9RSgdUYbiuci9qZA4uAbmWpvAlP+/PmZOXMmZcuWZdmyZdabcYA4f/48DzzwAN999x2lS5dm2bJl1KlTx+1YxgfcLCoKLBKRdSLSy5lWVlUTrxH9AyibStswEYkRkdUi0tqZVgqIU9XEn6oHATswmwdUqFCBL7/8knz58vHmm28ybdo0tyOZNJw9e5ZWrVqxaNEiypQpw/Lly7nxxhvdjmV8xM2icruq1gPuBfqISCPvmeoZQza1cWQjnUNmDwFviUjljH6oiPRyClJMbGxsVrMbP9OwYUPefvttwNOb8caNG90NZFJ05swZWrRowbJlyyhXrhwrVqygdu3abscyPuRaUVHVQ87zUWA20AA4IiLlAZzno+m03QusAOoCx4HiIpLPWexq4FAKbSeparSqRkdERPh0m4y7nnjiCbp378758+e5//77+f33392OZLwcP36cu+66i5UrV3LVVVexYsUKatas6XYs42OuFBURKSIi4YmvgWbAVmAO0NVZrCvwTQptS4hIQed1aeCvwHZnz2Y50C6t9iZ4iQjvvvsut912GwcOHKBVq1bW8aSfOHDgAA0bNmTNmjVERkby73//207KBym39lTKAqtEZBOwFpinqguA0cDdIrIbuMt5j4hEi8iHTtuaQIzTdjkwWlW3O/MGA8+IyB4851g+yrUtMn4hLCyMb775hipVqrBhwwa7IswP7Ny5k7/+9a/s2LGD2rVr8+OPP1KlShW3Y5kcIp4f+HlTdHS0xsTEuB3D5IA9e/Zwyy23cPz4cXr37s37779vvdy6YO3atbRo0YLjx49z22238e2331KiRIq3n5kAIiLrvG4F+RN/u6TYGJ+oUqUKc+bMoWDBgkycOJHhw4e7HSnP+frrr2nSpAnHjx+nZcuWLF682ApKHmBFxQSt2267jc8//5zQ0FBeffVV/vnPf7odKU9QVd58803atm3LuXPn6NatG7Nnz6Zw4cJuRzO5wIqKCWpt2rRh8uTJiAiDBw/mvffecztSUIuPj6d3794MHDgQVWXUqFF8/PHH5M+f3+1oJpfkS38RYwLbI488wtmzZ3n88cfp06cPYWFhdO/e3e1YQefEiRN07NiRJUuWEBYWxtSpU2nfvr3bsUwusz0Vkyf07t2b119/HYDHHnuMd9991+VEwWXjxo1ER0ezZMkSypQpw4oVK6yg5FFWVEyeMXDgQMaMGQNA3759eeONN1xOFBw+/fRTbr31Vvbt20f9+vVZu3YtN998s9uxjEusqJg8pX///rz//vsADBo0iJdeeom8fFl9dly6dIm+ffvSpUsXLly4QPfu3Vm1ahWRkZFuRzMusqJi8pzHH3+cyZMnExISwssvv0yPHj2Ij493O1ZA+eWXX2jYsCHvvvsuBQoUYOLEiXz44YeEhYW5Hc24zIqKyZO6du3KV199RaFChfj4449p1aoVp06dcjuW31NVPv30U6Kioli7di3XXnstK1eupFevXnZzqQGsqJg8rHXr1qxYsYKIiAgWLVpEw4YN2bdvn9ux/NZ///tfHnnkEbp06cKZM2do3749GzdutPMn5k+sqJg8rUGDBqxevZrq1auzefNm6tevz4IFC9yO5Xfmz59P7dq1mTZtGoULF+ajjz5ixowZdoe8+R9WVEyed91117F69WpatWrFyZMnadGiBSNGjODKlStuR3PdiRMn6Nq1Ky1atODgwYPcdNNNrF+/nu7du9vhLpMiKyrGAMWLF+ebb75hxIgRAAwfPpx77rmHgwcPupzMHarKF198wfXXX8/UqVMJCwvj9ddf58cff7Qu602arKgY4wgJCWHYsGFJ46YvWbKEOnXqMGPGDLej5aqtW7dy55130rFjR44cOULDhg3ZtGkTAwcOJF8+64TDpM2KijHJNG/enC1bttCyZUvi4uLo1KkTnTp14o8//nA7Wo6Ki4ujX79+REVFsXz5ckqVKsXEiRNZsWIF1apVczueCRBWVIxJQbly5Zg7dy4TJkygcOHCzJgxg+rVqzN+/HgSEhLcjudTZ8+eZfTo0VSqVIlx48ahqvTp04eff/6ZXr16ERJifyZMxtl/LcakQkTo3bs3W7dupWXLlpw6dYonn3ySBg0asHz5crfjZduFCxcYP348lStX5rnnniMuLo4mTZqwfv16xo8fT8mSJd2OaAKQFRVj0lGpUiXmzp3L7Nmzueaaa1i/fj1NmzalWbNmBOLIoSdOnGDkyJFERkby5JNPcuTIEW666SYWL17M0qVLufHGG92OaAKYFRVjMkBEaN26NTt27ODVV1+lWLFiLF68mJtuuolWrVqxfPlyv+9DbPv27fTr149rr72WYcOGcfToUerWrcusWbNYs2YNd911l10mbLJPVXP9AfwKbAE2AjHOtJLAYmC381wihXZRwH+AbcBmoKPXvMnAPmedG4Go9HLUr19fjcmKY8eO6aBBgzQsLEwBBbRevXo6efJkPXPmjNvxkpw5c0Y/+eQTve2225JyAtqsWTNdvHixXrlyxe2IJgAl/t1O6SHqwq8rEfkViFbVY17T/gmcUNXRIjIET1EZnKxdNUBVdbeIXAWsA2qqapyITAa+VdWZGc0RHR2tgXj4wviP2NhY3nvvPd59911iY2MBKFKkCO3ataNLly40atQo1y/DPXXqFPPmzWPmzJnMnz+f8+fPAxAeHs5DDz3E448/TlRUVK5mMsFFRNapanSK8/yoqOwC7lDVwyJSHlihqmneZSUim4B2TpGZjBUV45Lz58/z2Wef8fHHH/Of//wnaXqJEiVo3rw5LVu2pEmTJlx11VXpr2znTqhSBUJDISEB9uyBGjVSXTw+Pp5169axdOlSli5dyg8//MClS5eS5t9222089thjdOjQgaJFi2ZrO40B/ywq+4CTeHbFJ6rqJBGJU9XiznwBTia+T2UdDYApQC1VveIUlVuBi8BSYIiqXkwrhxUVkxN+/vlnpk6dyhdffMHu3bv/NO+aa67h5ptvpn79+lSrVo2qVatSuXJlChcu7Flg506oXh28z22owq5dxFeuzP79+9m7dy+//PILmzZtYt26dWzevJmLF///P3URoWHDhrRr1442bdpw9dVX58ZmmzwkraLi1jmVCs5zGWAT0AiIS7bMyTTalwd2AbckmyZAQTzFZngqbXsBMc5DU3tMnDgx6fjhxIkTU13O80/4/+rVq5fqcj179kxaLiYmJs11xsTEJC3bs2fPVJerV69e8mOd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\n"}}, {"output_type": "stream", "name": "stdout", "text": "2 Delta L: 0.0\n"}]}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Introductory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Error-on-means.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Unweighted and Weighted Means</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Gaussian-Distribution.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Gaussian (Normal) Distribution</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthew Feickert<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

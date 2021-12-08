@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The \(\chi^2\) Distribution &#8212; Statistics Notes</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Probability integral transform" href="probability-integral-transform.html" />
+    <link rel="prev" title="The Gaussian (Normal) Distribution" href="Gaussian-Distribution.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistics Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../introduction.html">
+   Statistics Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Likelihood-Function.html">
+   The Likelihood Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Error-on-means.html">
+   Uncertaninty on Means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Gaussian-Sampling.html">
+   Gaussian Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability Distributions
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Gaussian-Distribution.html">
+   The Normal Distribution
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Chi-Squared Distribution
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Results of Probability Theory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability-integral-transform.html">
+   Probability integral transform
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Simulation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../simulation/Rejection-Sampling-MC.html">
+   Monte Carlo Simulation via Rejection Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concepts in HEP
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../HEP/Extended-Likelihood.html">
+   Extended Likelihood
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Introductory/Chi-Squared-Distribution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Introductory/Chi-Squared-Distribution.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/matthewfeickert/Statistics-Notes/edit/main/book/notebooks/Introductory/Chi-Squared-Distribution.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/main?urlpath=lab/tree/book/notebooks/Introductory/Chi-Squared-Distribution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/matthewfeickert/Statistics-Notes/blob/main/book/notebooks/Introductory/Chi-Squared-Distribution.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chi-2-test-statistic">
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   Test Statistic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-distribution-function">
+   Probability Distribution Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mean">
+   Mean
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variance">
+   Variance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cumulative-distribution-function">
+   Cumulative Distribution Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binned-chi-2-per-degree-of-freedom">
+   Binned
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   per Degree of Freedom
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-chi-2-distribution">
+<h1>The <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution<a class="headerlink" href="#the-chi-2-distribution" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="chi-2-test-statistic">
+<h2><span class="math notranslate nohighlight">\(\chi^2\)</span> Test Statistic<a class="headerlink" href="#chi-2-test-statistic" title="Permalink to this headline">¶</a></h2>
+<p>If we make <span class="math notranslate nohighlight">\(n\)</span> ranom samples (observations) from Gaussian (Normal) distributions with known means, <span class="math notranslate nohighlight">\(\mu_i\)</span>, and known variances, <span class="math notranslate nohighlight">\(\sigma_i^2\)</span>, it is seen that the total squared deviation,</p>
+<div class="math notranslate nohighlight">
+\[
+\chi^2 = \sum_{i=1}^{n} \left(\frac{x_i - \mu_i}{\sigma_i}\right)^2\,,
+\]</div>
+<p>follows a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom.</p>
+</div>
+<div class="section" id="probability-distribution-function">
+<h2>Probability Distribution Function<a class="headerlink" href="#probability-distribution-function" title="Permalink to this headline">¶</a></h2>
+<p>The <span class="math notranslate nohighlight">\(\chi^2\)</span> probability distribution function for <span class="math notranslate nohighlight">\(k\)</span> degrees of freedom (the number of parameters that are allowed to vary) is given by</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(\chi^2\,;k\right) = \frac{\displaystyle 1}{\displaystyle 2^{k/2} \,\Gamma\left(k\,/2\right)}\, \chi^{k-2}\,e^{-\chi^2/2}\,,
+\]</div>
+<p>where if there are no constrained variables the number of degrees of freedom, <span class="math notranslate nohighlight">\(k\)</span>, is equal to the number of observations, <span class="math notranslate nohighlight">\(k=n\)</span>. The p.d.f. is often abbreviated in notation from <span class="math notranslate nohighlight">\(f\left(\chi^2\,;k\right)\)</span> to <span class="math notranslate nohighlight">\(\chi^2_k\)</span>.</p>
+<p>A reminder that for integer values of <span class="math notranslate nohighlight">\(k\)</span>, the Gamma function is <span class="math notranslate nohighlight">\(\Gamma\left(k\right) = \left(k-1\right)!\)</span>, and that <span class="math notranslate nohighlight">\(\Gamma\left(x+1\right) = x\Gamma\left(x\right)\)</span>, and <span class="math notranslate nohighlight">\(\Gamma\left(1/2\right) = \sqrt{\pi}\)</span>.</p>
+</div>
+<div class="section" id="mean">
+<h2>Mean<a class="headerlink" href="#mean" title="Permalink to this headline">¶</a></h2>
+<p>Letting <span class="math notranslate nohighlight">\(\chi^2=z\)</span>, and noting that the form of the Gamma function is</p>
+<div class="math notranslate nohighlight">
+\[
+\Gamma\left(z\right) = \int\limits_{0}^{\infty} x^{z-1}\,e^{-x}\,dx,
+\]</div>
+<p>it is seen that the mean of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution <span class="math notranslate nohighlight">\(f\left(\chi^2 ; k\right)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mu &amp;= \textrm{E}\left[z\right] = \displaystyle\int\limits_{0}^{\infty} z\, \frac{\displaystyle 1}{\displaystyle 2^{k/2} \,\Gamma\left(k\,/2\right)}\, z^{k/2-1}\,e^{-z\,/2}\,dz \\
+    &amp;= \displaystyle \frac{\displaystyle 1}{\displaystyle \Gamma\left(k\,/2\right)} \int\limits_{0}^{\infty} \left(\frac{z}{2}\right)^{k/2}\,e^{-z\,/2}\,dz = \displaystyle \frac{\displaystyle 1}{\displaystyle \Gamma\left(k\,/2\right)} \int\limits_{0}^{\infty} x^{k/2}\,e^{-x}\,2 \,dx \\
+    &amp;= \displaystyle \frac{\displaystyle 2 \,\Gamma\left(k\,/2 + 1\right)}{\displaystyle \Gamma\left(k\,/2\right)} \\
+    &amp;= \displaystyle 2 \frac{k}{2} \frac{\displaystyle \Gamma\left(k\,/2\right)}{\displaystyle \Gamma\left(k\,/2\right)} \\
+    &amp;= k.
+\end{align}
+\end{split}\]</div>
+</div>
+<div class="section" id="variance">
+<h2>Variance<a class="headerlink" href="#variance" title="Permalink to this headline">¶</a></h2>
+<p>Likewise, the variance is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\textrm{Var}\left[z\right] &amp;= \textrm{E}\left[\left(z-\textrm{E}\left[z\right]\right)^2\right] = \displaystyle\int\limits_{0}^{\infty} \left(z - k\right)^2\, \frac{\displaystyle 1}{\displaystyle 2^{k/2} \,\Gamma\left(k\,/2\right)}\, z^{k/2-1}\,e^{-z\,/2}\,dz \\
+    &amp;= \displaystyle\int\limits_{0}^{\infty} z^2\, f\left(z \,; k\right)\,dz - 2k\int\limits_{0}^{\infty} z\,\,f\left(z \,; k\right)\,dz + k^2\int\limits_{0}^{\infty} f\left(z \,; k\right)\,dz \\
+    &amp;= \displaystyle\int\limits_{0}^{\infty} z^2 \frac{\displaystyle 1}{\displaystyle 2^{k/2} \,\Gamma\left(k\,/2\right)}\, z^{k/2-1}\,e^{-z\,/2}\,dz - 2k^2 + k^2\\
+    &amp;= \displaystyle\int\limits_{0}^{\infty} \frac{\displaystyle 1}{\displaystyle 2^{k/2} \,\Gamma\left(k\,/2\right)}\, z^{k/2+1}\,e^{-z\,/2}\,dz - k^2\\
+    &amp;= \frac{\displaystyle 2}{\displaystyle \Gamma\left(k\,/2\right)} \displaystyle\int\limits_{0}^{\infty} \left(\frac{z}{2}\right)^{k/2+1}\,e^{-z\,/2}\,dz - k^2 = \frac{\displaystyle 2}{\displaystyle \Gamma\left(k\,/2\right)} \displaystyle\int\limits_{0}^{\infty} x^{k/2+1}\,e^{-x}\,2\,dx - k^2 \\
+    &amp;= \displaystyle \frac{\displaystyle 4 \,\Gamma\left(k\,/2 + 2\right)}{\displaystyle \Gamma\left(k\,/2\right)} - k^2 \\
+    &amp;= \displaystyle 4 \left(\frac{k}{2} + 1\right) \frac{\displaystyle \Gamma\left(k\,/2 + 1\right)}{\displaystyle \Gamma\left(k\,/2\right)} - k^2 \\
+    &amp;= \displaystyle 4 \left(\frac{k}{2} + 1\right) \frac{k}{2} - k^2 \\
+    &amp;= k^2 + 2k - k^2 \\
+    &amp;= 2k,
+\end{align}
+\end{split}\]</div>
+<p>such that the standard deviation is</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma = \sqrt{2k}\,.
+\]</div>
+<p>Given this information we now plot the <span class="math notranslate nohighlight">\(\chi^2\)</span> p.d.f. with various numbers of degrees of freedom to visualize how the distribution’s behaviour</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the chi^2 distribution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">ndf</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$k = $</span><span class="si">{</span><span class="n">ndf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ndf</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x=\chi^2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$f\left(x;k\right)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\chi^2$ distribution for various degrees of freedom&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Chi-Squared-Distribution_22_0.png" src="../../_images/Chi-Squared-Distribution_22_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="cumulative-distribution-function">
+<h2>Cumulative Distribution Function<a class="headerlink" href="#cumulative-distribution-function" title="Permalink to this headline">¶</a></h2>
+<p>The cumulative distribution function (CDF) for the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution is (letting <span class="math notranslate nohighlight">\(z=\chi^2\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+F_{\chi^2}\left(x\,; k\right) &amp;= \int\limits_{0}^{x} f_{\chi^2}\left(z\,; k\right) \,dz \\
+    &amp;= \int\limits_{0}^{x} \frac{\displaystyle 1}{\displaystyle 2^{k/2} \,\Gamma\left(k\,/2\right)}\, z^{k/2-1}\,e^{-z/2} \,dz \\
+    &amp;= \int\limits_{0}^{x} \frac{\displaystyle 1}{\displaystyle 2 \,\Gamma\left(k\,/2\right)}\, \left(\frac{z}{2}\right)^{k/2-1}\,e^{-z/2} \,dz = \frac{1}{\displaystyle 2 \,\Gamma\left(k\,/2\right)}\int\limits_{0}^{x/2} t^{k/2-1}\,e^{-t} \,2\,dt \\
+    &amp;= \frac{1}{\displaystyle \Gamma\left(k\,/2\right)}\int\limits_{0}^{x/2} t^{k/2-1}\,e^{-t} \,dt
+\end{split}
+\end{split}\]</div>
+<p>Noting the form of the <a class="reference external" href="https://en.wikipedia.org/wiki/Incomplete_gamma_function">lower incomplete gamma function</a> is</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma\left(s,x\right) = \int\limits_{0}^{x} t^{s-1}\,e^{-t} \,dt\,,
+\]</div>
+<p>and the form of the <a class="reference external" href="https://en.wikipedia.org/wiki/Incomplete_gamma_function#Regularized_Gamma_functions_and_Poisson_random_variables">regularized Gamma function</a> is</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(s,x\right) = \frac{\gamma\left(s,x\right)}{\Gamma\left(s\right)}\,,
+\]</div>
+<p>it is seen that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+F_{\chi^2}\left(x\,; k\right) &amp;= \frac{1}{\displaystyle \Gamma\left(k\,/2\right)}\int\limits_{0}^{x/2} t^{k/2-1}\,e^{-t} \,dt \\
+    &amp;= \frac{\displaystyle \gamma\left(\frac{k}{2},\frac{x}{2}\right)}{\displaystyle \Gamma\left(\frac{k}{2}\right)} \\
+    &amp;= P\left(\frac{k}{2},\frac{x}{2}\right)\,.
+\end{split}
+\end{split}\]</div>
+<p>Thus, it is seen that the compliment to the CDF (the complementary cumulative distribution function (CCDF)),</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{F}_{\chi^2}\left(x\,; k\right) = 1-F_{\chi^2}\left(x\,; k\right),
+\]</div>
+<p>represents a one-sided (one-tailed) <span class="math notranslate nohighlight">\(p\)</span>-value for observing a <span class="math notranslate nohighlight">\(\chi^2\)</span> given a model — that is, the probability to observe a <span class="math notranslate nohighlight">\(\chi^2\)</span> value greater than or equal to that which was observed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chi2_ccdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The complementary cumulative distribution function</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x: the value of chi^2</span>
+<span class="sd">        df: the number of degrees of freedom</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        1 - the cumulative distribution function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ndf</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">ndf</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$k = $</span><span class="si">{</span><span class="n">ndf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chi2_ccdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">ndf</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$k = $</span><span class="si">{</span><span class="n">ndf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x=\chi^2$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$F\left(x;k\right)$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\chi^2$ CDF for various degrees of freedom&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x=\chi^2$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\bar</span><span class="si">{F}</span><span class="s2">\left(x;k\right) = p$-value&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\chi^2$ CCDF ($p$-value) for various degrees of freedom&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Chi-Squared-Distribution_36_0.png" src="../../_images/Chi-Squared-Distribution_36_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="binned-chi-2-per-degree-of-freedom">
+<h2>Binned <span class="math notranslate nohighlight">\(\chi^2\)</span> per Degree of Freedom<a class="headerlink" href="#binned-chi-2-per-degree-of-freedom" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>[1] G. Cowan, <em>Statistical Data Analysis</em>, Oxford University Press, 1998</p></li>
+<li><p>[2] G. Cowan, “Goodness of fit and Wilk’s theorem”, Notes, 2013</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Introductory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Gaussian-Distribution.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">The Gaussian (Normal) Distribution</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="probability-integral-transform.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Probability integral transform</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthew Feickert<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Gaussian (Normal) Distribution &#8212; Statistics Notes</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The \(\chi^2\) Distribution" href="Chi-Squared-Distribution.html" />
+    <link rel="prev" title="Gaussian Sampling and use of Maximal Likliehood Estimators" href="Gaussian-Sampling.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistics Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../introduction.html">
+   Statistics Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Likelihood-Function.html">
+   The Likelihood Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Error-on-means.html">
+   Uncertaninty on Means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Gaussian-Sampling.html">
+   Gaussian Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability Distributions
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The Normal Distribution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chi-Squared-Distribution.html">
+   Chi-Squared Distribution
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Results of Probability Theory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="probability-integral-transform.html">
+   Probability integral transform
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Simulation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../simulation/Rejection-Sampling-MC.html">
+   Monte Carlo Simulation via Rejection Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concepts in HEP
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../HEP/Extended-Likelihood.html">
+   Extended Likelihood
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Introductory/Gaussian-Distribution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Introductory/Gaussian-Distribution.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/matthewfeickert/Statistics-Notes/edit/main/book/notebooks/Introductory/Gaussian-Distribution.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/main?urlpath=lab/tree/book/notebooks/Introductory/Gaussian-Distribution.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/matthewfeickert/Statistics-Notes/blob/main/book/notebooks/Introductory/Gaussian-Distribution.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-distribution-function">
+   Probability Distribution Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-width-at-half-maximum-fwhm">
+   Full Width at Half Maximum (FWHM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-and-the-error-function">
+   Probability and the Error Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cumulative-distribution-function-cdf">
+   Cumulative Distribution Function (cdf)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#p-values">
+   <span class="math notranslate nohighlight">
+    \(p\)
+   </span>
+   -values
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-tailed-p-value">
+     Two-Tailed
+     <span class="math notranslate nohighlight">
+      \(p\)
+     </span>
+     -value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-tailed-p-value">
+     One-Tailed
+     <span class="math notranslate nohighlight">
+      \(p\)
+     </span>
+     -value
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-gaussian-normal-distribution">
+<h1>The Gaussian (Normal) Distribution<a class="headerlink" href="#the-gaussian-normal-distribution" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="probability-distribution-function">
+<h2>Probability Distribution Function<a class="headerlink" href="#probability-distribution-function" title="Permalink to this headline">¶</a></h2>
+<p>The Normal (Gaussian) distribution probability distribution function is</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(x; \mu, \sigma\right) = \frac{1}{\sqrt{2\pi}\sigma}\,e^{-\left(x-\mu\right)^2/2\sigma^2},
+\]</div>
+<p>normalized to unity,</p>
+<div class="math notranslate nohighlight">
+\[
+\int\limits_{-\infty}^{\infty} f\left(x; \mu,\sigma\right)\,dx = 1,
+\]</div>
+<p>is symmetrically distributed about its mean, <span class="math notranslate nohighlight">\(\mu\)</span>, with width <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+</div>
+<div class="section" id="full-width-at-half-maximum-fwhm">
+<h2>Full Width at Half Maximum (FWHM)<a class="headerlink" href="#full-width-at-half-maximum-fwhm" title="Permalink to this headline">¶</a></h2>
+<p>The full width at half maximum (FWHM) is the distance between points on a curve at which the function reaches half its maximum value. The FWHM is often used to describe the “width” of a distribution.</p>
+<p>For a 1-dimensional Gaussian, it is seen that as the maximum value occurs as <span class="math notranslate nohighlight">\(x = \mu\)</span> (by definition), half of the maximum value is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\left.\frac{1}{\sqrt{2\pi}\sigma}\,e^{-\left(x-\mu\right)^2/2\sigma^2}\right|_{x = x \text{ of (max/2)}} &amp;= \frac{1}{2} f\left(x_{\text{max}}\right)\\
+    &amp;= \frac{1}{2} f\left(\mu\right) = \frac{1}{2} \frac{1}{\sqrt{2\pi}\sigma},
+\end{align*}
+\end{split}\]</div>
+<p>resulting in the equality</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-\left(x-\mu\right)^2/2\sigma^2} = \frac{1}{2},
+\]</div>
+<p>which is (taking the log)</p>
+<div class="math notranslate nohighlight">
+\[
+-\frac{\left(x-\mu\right)^2}{2\sigma^2} = -\ln2.
+\]</div>
+<p>Thus, solving the equality,</p>
+<div class="math notranslate nohighlight">
+\[
+\left(x-\mu\right)^2 = 2\sigma^2 \ln2,
+\]</div>
+<p>yields</p>
+<div class="math notranslate nohighlight">
+\[
+x_{\pm} = \pm \sigma \sqrt{2 \ln 2} + \mu.
+\]</div>
+<p>Thus, the FWHM is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\text{FWHM} &amp;= x_{+} - x_{-}\\
+    &amp;= \left(\sigma \sqrt{2 \ln 2} + \mu\right) - \left(-\sigma \sqrt{2 \ln 2} + \mu\right)\\
+    &amp;= \boxed{2\sqrt{2\ln2}\sigma}\,.
+\end{align*}
+\end{split}\]</div>
+<p><strong>N.B.:</strong> It is seen that the FWHM for a Gaussian is <em>independent</em> of both the normalization constant and the mean, and is only dependent on the standard devaiation of the Gaussian.</p>
+</div>
+<div class="section" id="probability-and-the-error-function">
+<h2>Probability and the Error Function<a class="headerlink" href="#probability-and-the-error-function" title="Permalink to this headline">¶</a></h2>
+<p>The probability that a Normally distributed random variable will lie in a range of values symmetrically integrated over is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\text{Pr}\left(\mu - y \leq x \leq \mu + y\right) &amp;= \int\limits_{\mu - y}^{\mu + y}\frac{1}{\sqrt{2\pi}\sigma}\,e^{-\left(x-\mu\right)^2/2\sigma^2}\,dx\\
+    &amp;= \int\limits_{\mu}^{\mu + y}\frac{2}{\sqrt{2\pi}\sigma}\,e^{-\left(x-\mu\right)^2/2\sigma^2}\,dx.
+\end{align*}
+\end{split}\]</div>
+<p>Making the substitution</p>
+<div class="math notranslate nohighlight">
+\[
+t = \frac{\left(x-\mu\right)}{\sqrt{2}\sigma},
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\text{Pr}\left(\mu - y \leq x \leq \mu + y\right) &amp;= \int\limits_{\mu}^{\mu + y}\frac{2}{\sqrt{2\pi}\sigma}\,e^{-\left(x-\mu\right)^2/2\sigma^2}\,dx\\
+    &amp;= \boxed{\frac{2}{\sqrt{\pi}} \int\limits_{0}^{y/\sqrt{2}\sigma}e^{-t^2}\,dt \equiv \text{erf}\left(\frac{y}{\sqrt{2}\sigma}\right)}\,.
+\end{align*}
+\end{split}\]</div>
+</div>
+<div class="section" id="cumulative-distribution-function-cdf">
+<h2>Cumulative Distribution Function (cdf)<a class="headerlink" href="#cumulative-distribution-function-cdf" title="Permalink to this headline">¶</a></h2>
+<p>For the cumulative distribution function (cdf),</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi\left(x\right) = \int\limits_{-\infty}^{x}f\left(t;\mu,\sigma\right)\,dt,
+\]</div>
+<p>it is seen, noting from the form of the error function, that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+\frac{2}{\sqrt{\pi}} \int\limits_{0}^{y/\sqrt{2}\sigma}e^{-t^2}\,dt = \frac{2}{\sqrt{2 \pi}} \int\limits_{0}^{y/\sigma}e^{-t^2/2}\,dt = \text{erf}\left(\frac{y}{\sqrt{2}\sigma}\right),
+\end{equation*}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+
+<span class="n">sym</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">no_global</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">sigma</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">t</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t y&quot;</span><span class="p">)</span>
+<span class="n">sym</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sym</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">/</span> <span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Distribution_35_0.png" src="../../_images/Gaussian-Distribution_35_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sym</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sym</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sym</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Distribution_36_0.png" src="../../_images/Gaussian-Distribution_36_0.png" />
+</div>
+</div>
+<p>then for the standard Gaussian (<span class="math notranslate nohighlight">\(\mu = 0\)</span>, <span class="math notranslate nohighlight">\(\sigma=1\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\Phi\left(x\right) &amp;= \frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{x} e^{-t^2/2}\,dt\\
+    &amp;= \frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{0} e^{-t^2/2}\,dt + \frac{1}{\sqrt{2\pi}}\int\limits_{0}^{x} e^{-t^2/2}\,dt\\
+    &amp;= \frac{1}{2} + \frac{1}{2} \text{erf}\left(\frac{x}{\sqrt{2}}\right)\\
+    &amp;= \frac{1}{2} \left(1 + \text{erf}\left(\frac{x}{\sqrt{2}}\right)\right)
+\end{align*}
+\end{split}\]</div>
+<p>so it is likewise seen that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\text{Pr}\left(\mu - n \sigma \leq x \leq \mu + n\sigma\right) &amp;= \Phi(n) - \Phi(-n)\\
+    &amp;= \Phi(n) - \left(1-\Phi(n)\right)\\
+    &amp;= \frac{1}{2} \left(1 + \text{erf}\left(\frac{n}{\sqrt{2}}\right)\right) - \left[1-\frac{1}{2} \left(1 + \text{erf}\left(\frac{n}{\sqrt{2}}\right)\right)\right]\\
+    &amp;= \text{erf}\left(\frac{n}{\sqrt{2}}\right).
+\end{align*}
+\end{split}\]</div>
+<p><strong>Show this for:</strong> generic normal distribution <span class="math notranslate nohighlight">\(f\)</span> with mean <span class="math notranslate nohighlight">\(\mu\)</span> and std <span class="math notranslate nohighlight">\(\sigma\)</span></p>
+<p>It is noted that in the case that <span class="math notranslate nohighlight">\(\left|y\right|=n\sigma\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Pr}\left(\mu - y \leq x \leq \mu + y\right) = \text{Pr}\left(\mu - n\sigma \leq x \leq \mu + n\sigma\right) = \text{erf}\left(\frac{n}{\sqrt{2}}\right).
+\]</div>
+<p>So, for <span class="math notranslate nohighlight">\(n=1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Pr}\left(\mu - \sigma \leq x \leq \mu + \sigma\right) = \text{erf}\left(\frac{1}{\sqrt{2}}\right)
+\]</div>
+<p>However, at this point we are at an impass analytically, as the integral of a Gaussian function over a finite range has no analytical solution, and must be evaluated numerically.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span> <span class="k">as</span> <span class="n">special</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob_n_sigma</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">special</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_n_sigma</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Gaussian-Distribution_49_0.png" src="../../_images/Gaussian-Distribution_49_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="p-values">
+<h2><span class="math notranslate nohighlight">\(p\)</span>-values<a class="headerlink" href="#p-values" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="two-tailed-p-value">
+<h3>Two-Tailed  <span class="math notranslate nohighlight">\(p\)</span>-value<a class="headerlink" href="#two-tailed-p-value" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="one-tailed-p-value">
+<h3>One-Tailed  <span class="math notranslate nohighlight">\(p\)</span>-value<a class="headerlink" href="#one-tailed-p-value" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Introductory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Gaussian-Sampling.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Gaussian Sampling and use of Maximal Likliehood Estimators</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Chi-Squared-Distribution.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthew Feickert<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

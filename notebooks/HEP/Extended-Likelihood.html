@@ -1,0 +1,604 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extended Likelihood &#8212; Statistics Notes</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Rejection Sampling" href="../simulation/Rejection-Sampling-MC.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistics Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../introduction.html">
+   Statistics Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introductory/Likelihood-Function.html">
+   The Likelihood Function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introductory/Error-on-means.html">
+   Uncertaninty on Means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introductory/Gaussian-Sampling.html">
+   Gaussian Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introductory/Gaussian-Distribution.html">
+   The Normal Distribution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introductory/Chi-Squared-Distribution.html">
+   Chi-Squared Distribution
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Results of Probability Theory
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introductory/probability-integral-transform.html">
+   Probability integral transform
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Simulation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../simulation/Rejection-Sampling-MC.html">
+   Monte Carlo Simulation via Rejection Sampling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Concepts in HEP
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Extended Likelihood
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/HEP/Extended-Likelihood.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/matthewfeickert/Statistics-Notes/issues/new?title=Issue%20on%20page%20%2Fnotebooks/HEP/Extended-Likelihood.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/matthewfeickert/Statistics-Notes/edit/main/book/notebooks/HEP/Extended-Likelihood.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/main?urlpath=lab/tree/book/notebooks/HEP/Extended-Likelihood.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/matthewfeickert/Statistics-Notes/blob/main/book/notebooks/HEP/Extended-Likelihood.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unbinned-extended-likelihood">
+   Unbinned Extended Likelihood
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nu-is-dependent-on-vec-theta">
+     <span class="math notranslate nohighlight">
+      \(\nu\)
+     </span>
+     is dependent on
+     <span class="math notranslate nohighlight">
+      \(\vec{\theta}\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nu-is-independent-of-vec-theta">
+     <span class="math notranslate nohighlight">
+      \(\nu\)
+     </span>
+     is independent of
+     <span class="math notranslate nohighlight">
+      \(\vec{\theta}\)
+     </span>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#toy-example">
+       Toy Example
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#histfactory-example">
+       HistFactory Example
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binned-extended-likelihood">
+   Binned Extended Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references-and-acknowledgements">
+   References and Acknowledgements
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="extended-likelihood">
+<h1>Extended Likelihood<a class="headerlink" href="#extended-likelihood" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unbinned-extended-likelihood">
+<h2>Unbinned Extended Likelihood<a class="headerlink" href="#unbinned-extended-likelihood" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(x\)</span> be a random variable distributed according to a p.d.f. <span class="math notranslate nohighlight">\(~f\left(x\,\middle|\,\vec{\theta}\right)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation*}
+x \sim f\left(x\,\middle|\,\vec{\theta}\right),
+\end{equation*}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(n\)</span> observations, <span class="math notranslate nohighlight">\(\vec{x} = \left(x_1, \cdots, x_n\right)\)</span>, and <span class="math notranslate nohighlight">\(m\)</span> unknown parameters, <span class="math notranslate nohighlight">\(\vec{\theta} = \left(\theta_1, \cdots, \theta_m\right)\)</span>. The likelihood would normally then be</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\vec{\theta}\right) = \prod_{i=1}^{n} f\left(x_i; \vec{\theta}\right).
+\]</div>
+<p>However, if <span class="math notranslate nohighlight">\(n\)</span> itself is a Poisson random variable with mean <span class="math notranslate nohighlight">\(\nu\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+n \sim \text{Pois}\left(n \,\middle|\, \nu\right),
+\]</div>
+<p>then it follows that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+L\left(\nu; \vec{\theta}\right) &amp;= \text{Pois}\left(n; \nu\right) \prod_{i=1}^{n} f\left(x_i; \vec{\theta}\right) \notag\\
+    &amp;= \frac{\nu^{n}\,e^{-\nu}}{n!} \prod_{i=1}^{n} f\left(x_i; \vec{\theta}\right) \notag\\
+    &amp;= \frac{e^{-\nu}}{n!} \prod_{i=1}^{n} \nu\, f\left(x_i; \vec{\theta}\right).
+%\label{eq_extended-likelihood}
+\end{align}
+\end{split}\]</div>
+<p>This equation is known as the “extended likelihood function”, as we have “extended” the information encoded in the likelihood to include the expected number of events — a quantity of great importance to physicists. It can be see from inspection though that the extended likelihood still follows the form of a likelihood, so no different treatment is required in finding its MLE estimators.</p>
+<div class="section" id="nu-is-dependent-on-vec-theta">
+<h3><span class="math notranslate nohighlight">\(\nu\)</span> is dependent on <span class="math notranslate nohighlight">\(\vec{\theta}\)</span><a class="headerlink" href="#nu-is-dependent-on-vec-theta" title="Permalink to this headline">¶</a></h3>
+<p>In the instance that <span class="math notranslate nohighlight">\(\nu\)</span> is a function of <span class="math notranslate nohighlight">\(\vec{\theta}\)</span>, <span class="math notranslate nohighlight">\(\nu = \nu\left(\vec{\theta}\right)\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\vec{\theta}\right) = \frac{e^{-\nu\left(\vec{\theta}\right)}}{n!} \prod_{i=1}^{n} \nu\left(\vec{\theta}\right)\, f\left(x_i; \vec{\theta}\right),
+\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight">
+\[
+\ln L\left(\vec{\theta}\right) = - \nu\left(\vec{\theta}\right) - \ln n! + \sum_{i=1}^{n} \ln\left(\nu\left(\vec{\theta}\right)\, f\left(x_i; \vec{\theta}\right)\right),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is a constant of the data, and so will have no effect on finding the estimators of any parameters, leading it to be safely ignored. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\boxed{-\ln L\left(\vec{\theta}\right) = \nu\left(\vec{\theta}\right) -\sum_{i=1}^{n} \ln\left(\nu\left(\vec{\theta}\right)\, f\left(x_i; \vec{\theta}\right)\right)}\,.
+\end{equation}
+\]</div>
+<p>Note that as the resultant estimators, <span class="math notranslate nohighlight">\(\hat{\vec{\theta}}\)</span>, exploit information from both <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(x\)</span> this should generally lead to smaller variations for <span class="math notranslate nohighlight">\(\hat{\vec{\theta}}\)</span>.</p>
+</div>
+<div class="section" id="nu-is-independent-of-vec-theta">
+<h3><span class="math notranslate nohighlight">\(\nu\)</span> is independent of <span class="math notranslate nohighlight">\(\vec{\theta}\)</span><a class="headerlink" href="#nu-is-independent-of-vec-theta" title="Permalink to this headline">¶</a></h3>
+<p>In the instance that <span class="math notranslate nohighlight">\(\nu\)</span> is independent of <span class="math notranslate nohighlight">\(\vec{\theta}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\nu; \vec{\theta}\right) = \frac{e^{-\nu}}{n!} \prod_{i=1}^{n} \nu\, f\left(x_i; \vec{\theta}\right),
+\]</div>
+<p>then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\ln L\left(\nu; \vec{\theta}\right) &amp;= - \nu - \ln n! + \sum_{i=1}^{n} \ln\left(\nu\, f\left(x_i; \vec{\theta}\right)\right)\\
+    &amp;= - \nu  + \sum_{i=1}^{n} \left(\ln\nu + \ln f\left(x_i; \vec{\theta}\right)\right) - \ln n! \\
+    &amp;= - \nu + n \ln\nu  + \sum_{i=1}^{n} \ln f\left(x_i; \vec{\theta}\right) - \ln n!\,,
+\end{split}
+\end{split}\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\boxed{-\ln L\left(\nu; \vec{\theta}\right) = \nu - n \ln\nu  - \sum_{i=1}^{n} \ln f\left(x_i; \vec{\theta}\right)}\,.
+\end{equation}
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(L\)</span> is maximized with respect to a variable <span class="math notranslate nohighlight">\(\alpha\)</span> when <span class="math notranslate nohighlight">\(−\ln ⁡L\)</span> is minimized,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \left(-\ln L\right)}{\partial \alpha} = 0,
+\]</div>
+<p>then it is seen from</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \left(-\ln L\left(\nu; \vec{\theta}\right)\right)}{\partial \nu} = 1 - \frac{n}{\nu} = 0,
+\]</div>
+<p>that the maximum likelihood estimator for <span class="math notranslate nohighlight">\(\nu\)</span> is
+\begin{equation}
+\hat{\nu} = n,,
+\end{equation}</p>
+<p>and that</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \left(-\ln L\left(\nu; \vec{\theta}\right)\right)}{\partial \theta_j} = 0,
+\]</div>
+<p>results in the the same estimators <span class="math notranslate nohighlight">\(\hat{\vec{\theta}}\)</span> as in the “usual” maximum likelihood case.</p>
+<p>If the p.d.f. is of the form of a mixture model,</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(x; \vec{\theta}\right) = \sum_{i=1}^{m} \theta_i\, f_i\left(x\right),
+\]</div>
+<p>and an estimate of the weights is of interest, then as the parameters are not fully independent, given the constraint</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^{m} \theta_i = 1,
+\]</div>
+<p>then one of the <span class="math notranslate nohighlight">\(m\)</span> parameters can be replaced with</p>
+<div class="math notranslate nohighlight">
+\[
+1 - \sum_{i=1}^{m-1} \theta_i,
+\]</div>
+<p>so that the p.d.f. only constrains <span class="math notranslate nohighlight">\(m-1\)</span> parameters. This then allows the the likelihood to be constructed that allows to find the estimator for the unconstrained parameter.</p>
+<p>Equivalently, the extended likelihood function can be used, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\ln L\left(\nu; \vec{\theta}\right) &amp;= - \nu + n \ln\nu  + \sum_{i=1}^{n} \ln f\left(x_i; \vec{\theta}\right) \\
+    &amp;= - \nu  + \sum_{i=1}^{n} \ln \left(\nu\,f\left(x_i; \vec{\theta}\right)\right)\\
+    &amp;= - \nu  + \sum_{i=1}^{n} \ln \left(\sum_{j=1}^{m} \nu\,\theta_j\, f_j\left(x_i\right)\right).
+\end{split}
+\end{split}\]</div>
+<p>Letting <span class="math notranslate nohighlight">\(\mu_i\)</span>, the expected number of events of type <span class="math notranslate nohighlight">\(i\)</span>, be <span class="math notranslate nohighlight">\(\mu_i \equiv \theta_i \nu\)</span>, for <span class="math notranslate nohighlight">\(\vec{\mu} = \left(\mu_1, \cdots, \mu_m\right)\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\ln L\left(\vec{\mu}\right) = - \sum_{j=1}^{m} \mu_j  + \sum_{i=1}^{n} \ln \left(\sum_{j=1}^{m} \mu_j\, f_j\left(x_i\right)\right).
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\vec{\mu}\)</span> are unconstrained and all parameters are treated symmetrically, such that <span class="math notranslate nohighlight">\(\hat{\mu_i}\)</span> give the maximum likelihood estimator means of number of events of type <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<div class="section" id="toy-example">
+<h4><a class="reference external" href="http://www.physi.uni-heidelberg.de/~menzemer/Stat0708/statistik_vorlesung_7.pdf#page=10">Toy Example</a><a class="headerlink" href="#toy-example" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">NLL</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="n">nll</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">meas</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">meas</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">meas</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">meas</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">meas</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">meas</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">nll</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_observed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
+<span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">NLL</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">n_observed</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The MLE estimate for f: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The MLE estimate for f: 2.6155471948792126
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="histfactory-example">
+<h4>HistFactory Example<a class="headerlink" href="#histfactory-example" title="Permalink to this headline">¶</a></h4>
+<p>Consider a single channel with one signal and one bakcagound contribution (and no systematics). For <span class="math notranslate nohighlight">\(n\)</span> events, signal model <span class="math notranslate nohighlight">\(f_{S}(x_e)\)</span>, background model <span class="math notranslate nohighlight">\(f_{B}(x_e)\)</span>, <span class="math notranslate nohighlight">\(S\)</span> expected signal events, <span class="math notranslate nohighlight">\(B\)</span> expected backagound events, and signal fraciton <span class="math notranslate nohighlight">\(\mu\)</span>, a “marked Poisson model” [2] may be constructed, which treating the data as fixed results in the likelihood of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+L\left(\mu\right) &amp;= \text{Pois}\left(n \,\middle|\, \mu S + B\right) \prod_{e=1}^{n} \frac{\mu S\, f_{S}\left(x_e\right) + B\, f_{B}\left(x_e\right)}{\mu S + B}\\
+    &amp;= \frac{\left(\mu S + B\right)^{n} e^{-\left(\mu S + B\right)}}{n!} \prod_{e=1}^{n} \frac{\mu S\, f_{S}\left(x_e\right) + B\, f_{B}\left(x_e\right)}{\mu S + B}\\
+    &amp;= \frac{e^{-\left(\mu S + B\right)}}{n!} \prod_{e=1}^{n} \left(\,\mu S\, f_{S}\left(x_e\right) + B\, f_{B}\left(x_e\right)\right),
+\end{split}
+\end{split}\]</div>
+<p>and so</p>
+<div class="math notranslate nohighlight">
+\[
+-\ln L\left(\mu\right) = \left(\mu S + B\right) - \sum_{e=1}^{n} \ln \left(\,\mu S\, f_{S}\left(x_e\right) + B\, f_{B}\left(x_e\right)\right) + \underbrace{\ln n!}_{\text{constant}}.
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="binned-extended-likelihood">
+<h2>Binned Extended Likelihood<a class="headerlink" href="#binned-extended-likelihood" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="references-and-acknowledgements">
+<h2>References and Acknowledgements<a class="headerlink" href="#references-and-acknowledgements" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="http://www.pp.rhul.ac.uk/~cowan/sda/">Statistical Data Analysis</a>, Glen Cowan, 1998</p></li>
+<li><p>ROOT collaboration, K. Cranmer, G. Lewis, L. Moneta, A. Shibata and W. Verkerke, <a class="reference external" href="http://inspirehep.net/record/1236448"><em>HistFactory: A tool for creating statistical models for use with RooFit and RooStats</em></a>, 2012.</p></li>
+<li><p><a class="reference external" href="https://www.nikhef.nl/~vcroft/">Vince Croft</a>, Discussions with the author at CERN, July 2017</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/HEP"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../simulation/Rejection-Sampling-MC.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Rejection Sampling</p>
+        </div>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthew Feickert<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
