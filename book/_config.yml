@@ -15,7 +15,7 @@ html:
 repository:
   url: https://github.com/matthewfeickert/Statistics-Notes
   path_to_book: book
-  branch: master
+  branch: main
 
 # Launch button settings
 launch_buttons:
