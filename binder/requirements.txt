@@ -1,5 +1,4 @@
 ipywidgets
-matplotlib
-numpy
-scipy
-sympy
+matplotlib==3.5.0
+scipy==1.7.3
+sympy==1.9

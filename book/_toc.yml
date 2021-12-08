@@ -1,7 +1,8 @@
 # https://jupyterbook.org/customize/toc.html
-- file: introduction
-
-- part: Introduction
+format: jb-book
+root: introduction
+parts:
+- caption: Introduction
   chapters:
   - file: notebooks/Introductory/Likelihood-Function
     title: The Likelihood Function
@@ -10,24 +11,24 @@
   - file: notebooks/Introductory/Gaussian-Sampling.ipynb
     title: Gaussian Sampling
 
-- part: Probability Distributions
+- caption: Probability Distributions
   chapters:
   - file: notebooks/Introductory/Gaussian-Distribution.ipynb
     title: The Normal Distribution
   - file: notebooks/Introductory/Chi-Squared-Distribution.ipynb
     title: Chi-Squared Distribution
 
-- part: Results of Probability Theory
+- caption: Results of Probability Theory
   chapters:
   - file: notebooks/Introductory/probability-integral-transform.ipynb
     title: Probability Integral Transform
 
-- part: Simulation
+- caption: Simulation
   chapters:
   - file: notebooks/simulation/Rejection-Sampling-MC.ipynb
     title: Monte Carlo Simulation via Rejection Sampling
 
-- part: Concepts in HEP
+- caption: Concepts in HEP
   chapters:
   - file: notebooks/HEP/Extended-Likelihood.ipynb
     title: Extended Likelihood
