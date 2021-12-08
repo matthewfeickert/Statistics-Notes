@@ -1,15 +1,33 @@
 repos:
--   repo: https://github.com/psf/black
-    rev: 20.8b1
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
     hooks:
-    - id: black
-      language_version: python3
+    - id: check-added-large-files
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-symlinks
+    - id: check-json
+    - id: check-yaml
+    - id: check-toml
+    - id: check-xml
+    - id: debug-statements
+    - id: end-of-file-fixer
+    - id: mixed-line-ending
+    - id: trailing-whitespace
+
+-   repo: https://github.com/psf/black
+    rev: 21.12b0
+    hooks:
+    - id: black-jupyter
+
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v2.7.3
+    rev: v2.29.1
     hooks:
     - id: pyupgrade
+      args: ["--py39-plus"]
+
 -   repo: https://github.com/nbQA-dev/nbQA
-    rev: 0.4.0
+    rev: 1.2.2
     hooks:
-    - id: nbqa-black
     - id: nbqa-pyupgrade
+      additional_dependencies: [pyupgrade==2.29.1]
