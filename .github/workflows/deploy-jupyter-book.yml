@@ -3,7 +3,7 @@ name: Deploy Jupyter Book
 on:
   push:
     branches:
-    - master
+    - main
   pull_request:
   workflow_dispatch:
 
@@ -35,7 +35,7 @@ jobs:
         jupyter-book build book/
 
     - name: Deploy Jupyter book to GitHub pages
-      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
