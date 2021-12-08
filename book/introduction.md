@@ -3,7 +3,7 @@
 Personal notes on statistics with a focus on applications to experimental high energy physics.
 
 [![DOI](https://zenodo.org/badge/91207877.svg)](https://zenodo.org/badge/latestdoi/91207877)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/matthewfeickert/Statistics-Notes/main)
 
 ## References
 
